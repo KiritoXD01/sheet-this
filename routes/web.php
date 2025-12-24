@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ReportsController;
-use App\Http\Controllers\TimesheetController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\ReportsController;
+use App\Http\Controllers\Dashboard\TimesheetController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login')->name('home');
