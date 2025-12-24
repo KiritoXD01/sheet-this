@@ -13,7 +13,7 @@
                 Export
             </button>
             <a class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium text-sm shadow-glow transition-all active:scale-95 flex items-center gap-2"
-                href="#">
+                href="{{ route('admin.employees.create') }}">
                 <span class="material-icons text-sm">add</span>
                 Add Employee
             </a>
