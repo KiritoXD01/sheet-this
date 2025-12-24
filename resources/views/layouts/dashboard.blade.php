@@ -6,6 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="color-scheme" content="light" />
     <title>{{ config('app.name', 'Laravel') }} - Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet" />
@@ -14,15 +15,16 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
     <!-- Styles / Scripts -->
+    @wireUiScripts
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
         <link href="{{ asset('tailwind.css') }}" rel="stylesheet">
     @endif
-    @wireUiScripts
 </head>
 
 <body class="bg-background-light text-slate-800 antialiased min-h-screen flex flex-col">
+    <x-notifications />
     <livewire:dashboard.header />
     <main class="grow pt-28 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         @yield('content')
