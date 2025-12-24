@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ReportsController;
@@ -11,11 +12,18 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/login')->name('home');
 Route::get('/login', LoginController::class)->name('login');
 
-Route::middleware('auth')
+Route::middleware(['auth', 'employee'])
     ->prefix('dashboard')
     ->name('dashboard.')
     ->group(function () {
         Route::get('/', DashboardController::class)->name('index');
         Route::get('/timesheet', TimesheetController::class)->name('timesheet');
         Route::get('/reports', ReportsController::class)->name('reports');
+    });
+
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/', IndexController::class)->name('index');
     });

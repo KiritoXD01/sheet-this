@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Livewire\Auth;
 
+use App\Enums\UserRoleEnum;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -22,11 +24,29 @@ final class LoginForm extends Component
     {
         $this->validate();
 
-        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            redirect()->intended(route('dashboard.index'));
+        $success = Auth::attempt(
+            credentials: [
+                'email' => $this->email,
+                'password' => $this->password,
+            ],
+            remember: $this->remember
+        );
+
+        if (! $success) {
+            $this->addError('login', 'Invalid credentials');
+
+            return;
         }
 
-        $this->addError('login', 'Invalid credentials');
+        /** @var User */
+        $user = Auth::user();
+
+        $route = match ($user->role) {
+            UserRoleEnum::EMPLOYEE => 'dashboard.index',
+            default => 'admin.index',
+        };
+
+        redirect()->intended(route($route));
     }
 
     public function render()
