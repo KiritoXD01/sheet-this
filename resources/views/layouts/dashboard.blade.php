@@ -32,7 +32,7 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a class="text-sm font-medium text-primary transition-colors border-b-2 border-primary py-1"
-                        href="#">Dashboard</a>
+                        href="{{ route('dashboard.index') }}">Dashboard</a>
                     <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors py-1"
                         href="#">Timesheet</a>
                     <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors py-1"
@@ -45,21 +45,7 @@
                         <span
                             class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
                     </button>
-                    <div class="hidden md:flex items-center gap-3 pl-4 border-l border-slate-200">
-                        <div class="text-right">
-                            <div class="text-sm font-bold text-slate-900">John Smith</div>
-                            <div class="text-xs text-slate-500">Software Engineer</div>
-                        </div>
-                        <div
-                            class="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold overflow-hidden border border-primary/20">
-                            JS
-                        </div>
-                    </div>
-                    <div class="md:hidden">
-                        <button class="text-slate-600 hover:text-primary p-2">
-                            <span class="material-icons">menu</span>
-                        </button>
-                    </div>
+                    <livewire:dashboard.profile-dropdown />
                 </div>
             </div>
         </div>
