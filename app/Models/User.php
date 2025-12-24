@@ -16,8 +16,8 @@ use Illuminate\Notifications\Notifiable;
  * @property-read string $email
  * @property-read string $password
  * @property-read UserRoleEnum $role
- * @property-read Carbon $email_verified_at
- * @property-read string $remember_token
+ * @property-read Carbon|null $email_verified_at
+ * @property-read string|null $remember_token
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
  */
