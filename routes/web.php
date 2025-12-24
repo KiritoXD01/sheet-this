@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -26,4 +27,5 @@ Route::middleware(['auth', 'admin'])
     ->name('admin.')
     ->group(function () {
         Route::get('/', IndexController::class)->name('index');
+        Route::get('/employees', EmployeeController::class)->name('employees');
     });

@@ -44,8 +44,8 @@ final class Header extends Component
                 ],
                 [
                     'title' => 'Employees',
-                    'route' => '#',
-                    'active' => false,
+                    'route' => route('admin.employees'),
+                    'active' => request()->routeIs('admin.employees'),
                 ],
                 [
                     'title' => 'Approvals',
