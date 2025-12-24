@@ -43,7 +43,7 @@ final class LoginForm extends Component
 
         $route = match ($user->role) {
             UserRoleEnum::EMPLOYEE => 'dashboard.index',
-            default => 'admin.index',
+            default => $user->company ? 'admin.index' : 'admin.onboarding',
         };
 
         redirect()->intended(route($route));

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\CreateEmployeeController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\OnboardingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ReportsController;
@@ -24,7 +25,16 @@ Route::middleware(['auth', 'employee'])
         Route::get('/reports', ReportsController::class)->name('reports');
     });
 
+// Admin onboarding (no company check required)
 Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/onboarding', OnboardingController::class)->name('onboarding');
+    });
+
+// Protected admin routes (require company via admin.company middleware)
+Route::middleware(['auth', 'admin', 'admin.company'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
