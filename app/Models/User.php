@@ -4,14 +4,26 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserRoleEnum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property-read int $id
+ * @property-read string $name
+ * @property-read string $email
+ * @property-read string $password
+ * @property-read UserRoleEnum $role
+ * @property-read Carbon $email_verified_at
+ * @property-read string $remember_token
+ * @property-read Carbon $created_at
+ * @property-read Carbon $updated_at
+ */
 final class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -23,6 +35,7 @@ final class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -45,6 +58,7 @@ final class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'role' => UserRoleEnum::class,
         ];
     }
 }
