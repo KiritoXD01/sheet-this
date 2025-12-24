@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 enum IndustryEnum: string
 {
     use HasEnumUtils;
+
     case TECHNOLOGY = 'technology';
     case FINANCE = 'finance';
     case HEALTHCARE = 'healthcare';

@@ -6,6 +6,8 @@ namespace App\Models;
 
 use App\Enums\UserRoleEnum;
 use Carbon\Carbon;
+use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,9 +25,9 @@ use Illuminate\Notifications\Notifiable;
  * @property-read Carbon $updated_at
  * @property-read Company|null $company
  */
+#[UseFactory(UserFactory::class)]
 final class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
