@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\UserRoleEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -20,6 +21,7 @@ use Illuminate\Notifications\Notifiable;
  * @property-read string|null $remember_token
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
+ * @property-read Company|null $company
  */
 final class User extends Authenticatable
 {
@@ -47,6 +49,15 @@ final class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function company(): HasOne
+    {
+        return $this->hasOne(
+            related: Company::class,
+            foreignKey: 'owner_id',
+            localKey: 'id',
+        );
+    }
 
     /**
      * Get the attributes that should be cast.
