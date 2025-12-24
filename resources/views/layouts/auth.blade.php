@@ -23,6 +23,7 @@
             min-height: 100vh;
         }
     </style>
+    @wireUiScripts
 </head>
 
 <body class="hero-bg text-slate-800 antialiased flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -38,7 +39,7 @@
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div
             class="bg-white py-8 px-4 shadow-soft sm:rounded-2xl sm:px-10 border border-slate-100 relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50">
+            <div class="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-primary/50 via-primary to-primary/50">
             </div>
             @yield('content')
         </div>

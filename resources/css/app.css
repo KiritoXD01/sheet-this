@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+@import '../../vendor/wireui/wireui/ts/global.css';
+@source '../../vendor/wireui/wireui';
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -12,11 +15,8 @@
     --color-primary: #00bfa5;
     --color-primary-hover: #009688;
     --color-background-light: #F8FAFC;
-    --color-background-dark: #0f172a;
-    --color-text-dark: #0f172a;
     --color-text-light: #e2e8f0;
     --color-card-light: #ffffff;
-    --color-card-dark: #1e293b;
 
     --font-family-display: 'Inter', sans-serif;
     --font-family-sans: 'Inter', sans-serif;
