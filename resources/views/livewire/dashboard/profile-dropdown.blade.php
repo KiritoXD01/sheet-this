@@ -10,5 +10,5 @@
         </div>
     </x-slot>
 
-    <x-dropdown.item separator label="Logout" wire:click="logout" wire:confirm="Are you sure you want to logout?" />
+    <x-dropdown.item label="Logout" wire:click="logout" wire:confirm="Are you sure you want to logout?" />
 </x-dropdown>

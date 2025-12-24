@@ -1,3 +1,5 @@
+@use(Illuminate\Support\Facades\Auth)
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -54,12 +56,12 @@
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
                 <h1 class="text-3xl font-bold text-slate-900">Dashboard</h1>
-                <p class="text-slate-500 mt-1">Welcome back! Here's what's happening today.</p>
+                <p class="text-slate-500 mt-1">Welcome back! {{ Auth::user()->name }} Here's what's happening today.</p>
             </div>
             <div
                 class="flex items-center gap-2 text-sm text-slate-500 bg-white px-4 py-2 rounded-lg border border-slate-100 shadow-sm">
                 <span class="material-icons text-primary text-base">calendar_today</span>
-                <span>Monday, October 23, 2025</span>
+                <span>{{ now()->format('l, F j, Y') }}</span>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -285,7 +287,8 @@
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-sm text-slate-500">
-                © 2025 Sheet This. All rights reserved.
+                © 2025 <a href="https://sheetthis.com" target="_blank">Sheet This</a>. All rights
+                reserved.
             </div>
             <div class="flex gap-6 text-sm text-slate-500">
                 <a class="hover:text-primary transition-colors" href="#">Help Center</a>
