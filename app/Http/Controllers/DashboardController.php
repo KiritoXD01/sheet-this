@@ -13,6 +13,6 @@ final class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return 'dashboard';
+        return view('dashboard.index');
     }
 }

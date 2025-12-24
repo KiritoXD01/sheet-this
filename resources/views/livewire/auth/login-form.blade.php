@@ -1,4 +1,5 @@
-<form wire:submit="submit" class="space-y-6">
+<form wire:submit="submit" class="space-y-6" autocomplete="off">
+    <x-errors only="login" />
     <div>
         <x-input label="Email" placeholder="your email" wire:model="email" type="email" />
     </div>
