@@ -10,6 +10,6 @@ final class CreateEmployeeController extends Controller
 {
     public function __invoke()
     {
-        return view('admin.company.create');
+        return view('admin.employees.create');
     }
 }

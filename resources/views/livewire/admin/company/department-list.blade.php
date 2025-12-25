@@ -30,13 +30,13 @@
         <button class="text-sm text-primary hover:text-primary-hover font-medium">View all departments</button>
     </div>
     <x-modal-card :title="$modalTitle" name="cardModal" persistent>
-        <form wire:submit="submit">
+        <form wire:submit="submit" id="departmentForm">
             <x-input type="text" wire:model="departmentName" placeholder="Department Name" />
             <x-slot name="footer" class="flex justify-between gap-x-4">
                 <div class="flex gap-x-4">
                     <x-button flat label="Cancel" wire:click="close" type="button" />
 
-                    <x-button primary label="Save" type="submit" />
+                    <x-button primary label="Save" type="submit" form="departmentForm" />
                 </div>
             </x-slot>
         </form>

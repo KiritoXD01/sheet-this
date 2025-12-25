@@ -9,7 +9,7 @@ use App\Models\Company;
 use App\Models\Department;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Validate;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use WireUi\Traits\WireUiActions;
 
@@ -25,7 +25,6 @@ final class DepartmentList extends Component
 
     public ?Department $department = null;
 
-    #[Validate(['required', 'string', 'max:255'])]
     public string $departmentName = '';
 
     public function mount(): void
@@ -57,7 +56,16 @@ final class DepartmentList extends Component
 
     public function submit(): void
     {
-        $this->validate();
+        $this->validate([
+            'departmentName' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('departments', 'name')
+                    ->when($this->mode === ModalModeEnum::EDIT, fn ($rule) => $rule->ignore($this->department->id))
+                    ->where('company_id', Auth::user()->company->id),
+            ],
+        ]);
 
         if ($this->mode === ModalModeEnum::CREATE) {
             /** @var Company */
@@ -76,7 +84,7 @@ final class DepartmentList extends Component
 
         $this->notification()->send([
             'icon' => 'success',
-            'title' => 'Department '.$this->mode === ModalModeEnum::CREATE ? 'Created' : 'Updated',
+            'title' => $this->mode === ModalModeEnum::CREATE ? 'Department Created' : 'Department Updated',
             'description' => $this->mode === ModalModeEnum::CREATE
                 ? 'Department has been created successfully.'
                 : 'Department has been updated successfully.',
