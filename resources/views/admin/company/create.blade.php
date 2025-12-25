@@ -139,10 +139,10 @@
             </section>
         </div>
         <div class="bg-slate-50 border-t border-slate-100 px-6 py-4 flex justify-end gap-3 rounded-b-xl">
-            <button
+            <a href="{{ route('admin.employees') }}"
                 class="px-5 py-2.5 rounded-lg border border-slate-200 text-slate-600 font-medium text-sm hover:bg-white transition-colors shadow-sm">
                 Cancel
-            </button>
+            </a>
             <button
                 class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium text-sm shadow-glow transition-all active:scale-95 flex items-center gap-2">
                 <span class="material-icons text-sm">person_add</span>
