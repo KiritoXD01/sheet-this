@@ -9,8 +9,10 @@
                 Back to Employees List
             </a>
             <h1 class="text-3xl font-bold text-slate-900">Create New Employee</h1>
-            <p class="text-slate-500 mt-1">Add a new team member to your organization and set up their
-                profile.</p>
+            <p class="text-slate-500 mt-1">
+                Add a new team member to your organization and set up their
+                profile.
+            </p>
         </div>
     </div>
     <div class="bg-white rounded-xl shadow-soft border border-slate-100 overflow-hidden">
@@ -22,7 +24,7 @@
                 </h2>
                 <div class="space-y-6">
                     <div class="flex items-start gap-6">
-                        <div class="flex-shrink-0">
+                        <div class="shrink-0">
                             <div
                                 class="w-24 h-24 rounded-full bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center hover:bg-slate-50 transition-colors cursor-pointer">
                                 <span class="material-icons text-slate-400 text-3xl">account_circle</span>

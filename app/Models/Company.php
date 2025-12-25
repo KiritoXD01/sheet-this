@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property-read int $id
@@ -20,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int $owner_id
  * @property-read User $owner
  * @property-read Department[] $departments
+ * @property-read CompanyPolicy $policy
  */
 #[UseFactory(CompanyFactory::class)]
 final class Company extends Model
@@ -50,6 +52,19 @@ final class Company extends Model
 
     public function departments(): HasMany
     {
-        return $this->hasMany(Department::class);
+        return $this->hasMany(
+            related: Department::class,
+            foreignKey: 'company_id',
+            localKey: 'id',
+        );
+    }
+
+    public function policy(): HasOne
+    {
+        return $this->hasOne(
+            related: CompanyPolicy::class,
+            foreignKey: 'company_id',
+            localKey: 'id',
+        );
     }
 }

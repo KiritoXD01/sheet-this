@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('company_policies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('owner_id')->unique()->references('id')->on('users');
-            $table->string('name');
-            $table->string('industry');
-            $table->string('logo')->nullable();
+            $table->foreignId('company_id')->unique()->references('id')->on('companies');
+            $table->string('default_time_zone');
+            $table->tinyInteger('standard_work_day')->default(8);
+            $table->json('work_week');
+            $table->boolean('overtime_enabled')->default(false);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('company_policies');
     }
 };

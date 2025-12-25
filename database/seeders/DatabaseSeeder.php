@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Enums\UserRoleEnum;
 use App\Models\Company;
+use App\Models\CompanyPolicy;
 use App\Models\Department;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -30,7 +31,11 @@ final class DatabaseSeeder extends Seeder
             'owner_id' => $admin->id,
         ]);
 
-        Department::factory(10)->create([
+        Department::factory(5)->create([
+            'company_id' => $company->id,
+        ]);
+
+        CompanyPolicy::factory()->create([
             'company_id' => $company->id,
         ]);
 
