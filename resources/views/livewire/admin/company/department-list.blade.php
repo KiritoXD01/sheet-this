@@ -4,7 +4,7 @@
             <span class="material-symbols-outlined text-primary">groups</span>
             Departments
         </h2>
-        <button type="button"
+        <button type="button" wire:click="openCreateModal"
             class="cursor-pointer text-xs bg-white border border-slate-200 hover:border-primary text-slate-600 px-2 py-1 rounded shadow-sm transition-colors flex items-center gap-1">
             <span class="material-icons text-xs">add</span> New
         </button>
@@ -18,7 +18,8 @@
                 </div>
                 <div
                     class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                    <button class="text-slate-400 hover:text-primary">
+                    <button class="text-slate-400 hover:text-primary" type="button"
+                        wire:click="openEditModal({{ $department->id }})">
                         <span class="material-icons text-lg">edit</span>
                     </button>
                 </div>
@@ -28,4 +29,16 @@
     <div class="p-4 bg-slate-50 border-t border-slate-100 text-center">
         <button class="text-sm text-primary hover:text-primary-hover font-medium">View all departments</button>
     </div>
+    <x-modal-card :title="$modalTitle" name="cardModal" persistent>
+        <form wire:submit="submit">
+            <x-input type="text" wire:model="departmentName" placeholder="Department Name" />
+            <x-slot name="footer" class="flex justify-between gap-x-4">
+                <div class="flex gap-x-4">
+                    <x-button flat label="Cancel" wire:click="close" type="button" />
+
+                    <x-button primary label="Save" type="submit" />
+                </div>
+            </x-slot>
+        </form>
+    </x-modal-card>
 </div>
