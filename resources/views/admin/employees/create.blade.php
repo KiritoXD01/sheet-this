@@ -20,33 +20,52 @@
                     <span class="material-symbols-outlined text-primary">person</span>
                     Personal Information
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-1.5">
-                        <label class="block text-sm font-medium text-slate-700">First Name <span
-                                class="text-red-500">*</span></label>
-                        <input
-                            class="w-full rounded-lg border-slate-200 bg-slate-50 text-slate-900 focus:ring-primary focus:border-primary transition-shadow placeholder-slate-400"
-                            placeholder="e.g. Jane" type="text" />
-                    </div>
-                    <div class="space-y-1.5">
-                        <label class="block text-sm font-medium text-slate-700">Last Name <span
-                                class="text-red-500">*</span></label>
-                        <input
-                            class="w-full rounded-lg border-slate-200 bg-slate-50 text-slate-900 focus:ring-primary focus:border-primary transition-shadow placeholder-slate-400"
-                            placeholder="e.g. Cooper" type="text" />
-                    </div>
-                    <div class="space-y-1.5 md:col-span-2">
-                        <label class="block text-sm font-medium text-slate-700">Email Address <span
-                                class="text-red-500">*</span></label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="material-icons text-slate-400 text-lg">mail</span>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-6">
+                        <div class="flex-shrink-0">
+                            <div
+                                class="w-24 h-24 rounded-full bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center hover:bg-slate-50 transition-colors cursor-pointer">
+                                <span class="material-icons text-slate-400 text-3xl">account_circle</span>
                             </div>
-                            <input
-                                class="w-full rounded-lg border-slate-200 bg-slate-50 text-slate-900 focus:ring-primary focus:border-primary transition-shadow pl-10 placeholder-slate-400"
-                                placeholder="jane.cooper@example.com" type="email" />
+                            <button class="mt-2 w-full text-xs text-primary hover:text-primary-hover font-medium">
+                                Upload Photo
+                            </button>
                         </div>
-                        <p class="text-xs text-slate-500 mt-1">This email will be used for login and notifications.</p>
+                        <div class="flex-1 space-y-1.5">
+                            <label class="block text-sm font-medium text-slate-700">Profile Picture</label>
+                            <p class="text-sm text-slate-500">Upload a professional headshot. Recommended size: 400x400px.
+                                Max file size: 5MB.</p>
+                            <input type="file" accept="image/*" class="hidden" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-1.5">
+                            <label class="block text-sm font-medium text-slate-700">First Name <span
+                                    class="text-red-500">*</span></label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 bg-slate-50 text-slate-900 focus:ring-primary focus:border-primary transition-shadow placeholder-slate-400"
+                                placeholder="e.g. Jane" type="text" />
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-sm font-medium text-slate-700">Last Name <span
+                                    class="text-red-500">*</span></label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 bg-slate-50 text-slate-900 focus:ring-primary focus:border-primary transition-shadow placeholder-slate-400"
+                                placeholder="e.g. Cooper" type="text" />
+                        </div>
+                        <div class="space-y-1.5 md:col-span-2">
+                            <label class="block text-sm font-medium text-slate-700">Email Address <span
+                                    class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span class="material-icons text-slate-400 text-lg">mail</span>
+                                </div>
+                                <input
+                                    class="w-full rounded-lg border-slate-200 bg-slate-50 text-slate-900 focus:ring-primary focus:border-primary transition-shadow pl-10 placeholder-slate-400"
+                                    placeholder="jane.cooper@example.com" type="email" />
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1">This email will be used for login and notifications.</p>
+                        </div>
                     </div>
                 </div>
             </section>

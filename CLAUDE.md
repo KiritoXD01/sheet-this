@@ -10,6 +10,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 
 - php - 8.4.16
 - laravel/framework (LARAVEL) - v12
+- laravel/nightwatch (NIGHTWATCH) - v1
 - laravel/prompts (PROMPTS) - v0
 - livewire/livewire (LIVEWIRE) - v3
 - laravel/mcp (MCP) - v0
