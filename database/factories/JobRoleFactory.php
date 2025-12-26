@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Enums\WorkWeekDaysEnum;
 use App\Models\Company;
-use App\Models\CompanyPolicy;
+use App\Models\JobRole;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<CompanyPolicy>
+ * @extends Factory<JobRole>
  */
-final class CompanyPolicyFactory extends Factory
+final class JobRoleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,11 +21,8 @@ final class CompanyPolicyFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => fake()->jobTitle(),
             'company_id' => Company::factory(),
-            'default_time_zone' => fake()->timezone(),
-            'standard_work_day' => fake()->numberBetween(8, 12),
-            'work_week' => WorkWeekDaysEnum::values(),
-            'overtime_enabled' => fake()->boolean(),
         ];
     }
 }

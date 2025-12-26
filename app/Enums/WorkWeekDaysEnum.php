@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
+use App\Traits\HasEnumUtils;
 use Illuminate\Support\Str;
 
 enum WorkWeekDaysEnum: string
 {
+    use HasEnumUtils;
+
     case MONDAY = 'monday';
     case TUESDAY = 'tuesday';
     case WEDNESDAY = 'wednesday';

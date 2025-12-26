@@ -6,53 +6,53 @@ namespace App\Livewire\Admin\Company;
 
 use App\Enums\ModalModeEnum;
 use App\Models\Company;
-use App\Models\Department;
+use App\Models\JobRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
 use WireUi\Traits\WireUiActions;
 
-final class DepartmentList extends Component
+final class JobRoleList extends Component
 {
     use WireUiActions;
     use WithPagination;
 
     public ModalModeEnum $mode = ModalModeEnum::CREATE;
 
-    public string $modalTitle = 'Create Department';
+    public string $modalTitle = 'Create Job Role';
 
-    public ?Department $department = null;
+    public ?JobRole $jobRole = null;
 
-    public string $departmentName = '';
+    public string $jobRoleName = '';
 
     protected $paginationTheme = 'tailwind';
 
     public function openCreateModal(): void
     {
         $this->mode = ModalModeEnum::CREATE;
-        $this->modalTitle = 'Create Department';
+        $this->modalTitle = 'Create Job Role';
         $this->js('$openModal("cardModal")');
     }
 
     public function openEditModal(int $id): void
     {
-        $this->department = Department::findOrFail($id);
+        $this->jobRole = JobRole::findOrFail($id);
         $this->mode = ModalModeEnum::EDIT;
-        $this->modalTitle = 'Edit Department';
-        $this->departmentName = $this->department->name;
+        $this->modalTitle = 'Edit Job Role';
+        $this->jobRoleName = $this->jobRole->name;
         $this->js('$openModal("cardModal")');
     }
 
     public function submit(): void
     {
         $this->validate([
-            'departmentName' => [
+            'jobRoleName' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('departments', 'name')
-                    ->when($this->mode === ModalModeEnum::EDIT, fn ($rule) => $rule->ignore($this->department->id))
+                Rule::unique('job_roles', 'name')
+                    ->when($this->mode === ModalModeEnum::EDIT, fn ($rule) => $rule->ignore($this->jobRole->id))
                     ->where('company_id', Auth::user()->company->id),
             ],
         ]);
@@ -61,23 +61,23 @@ final class DepartmentList extends Component
             /** @var Company */
             $company = Auth::user()->company;
 
-            Department::create([
-                'name' => $this->departmentName,
+            JobRole::create([
+                'name' => $this->jobRoleName,
                 'company_id' => $company->id,
             ]);
 
         } else {
-            $this->department->update([
-                'name' => $this->departmentName,
+            $this->jobRole->update([
+                'name' => $this->jobRoleName,
             ]);
         }
 
         $this->notification()->send([
             'icon' => 'success',
-            'title' => $this->mode === ModalModeEnum::CREATE ? 'Department Created' : 'Department Updated',
+            'title' => $this->mode === ModalModeEnum::CREATE ? 'Job Role Created' : 'Job Role Updated',
             'description' => $this->mode === ModalModeEnum::CREATE
-                ? 'Department has been created successfully.'
-                : 'Department has been updated successfully.',
+                ? 'Job role has been created successfully.'
+                : 'Job role has been updated successfully.',
         ]);
 
         $this->close();
@@ -85,8 +85,8 @@ final class DepartmentList extends Component
 
     public function close(): void
     {
-        $this->departmentName = '';
-        $this->department = null;
+        $this->jobRoleName = '';
+        $this->jobRole = null;
         $this->mode = ModalModeEnum::CREATE;
         $this->js('$closeModal("cardModal")');
     }
@@ -96,12 +96,12 @@ final class DepartmentList extends Component
         /** @var Company */
         $company = Auth::user()->company;
 
-        $departments = Department::query()
+        $jobRoles = JobRole::query()
             ->where('company_id', $company->id)
             ->paginate(5);
 
-        return view('livewire.admin.company.department-list', [
-            'departments' => $departments,
+        return view('livewire.admin.company.job-role-list', [
+            'jobRoles' => $jobRoles,
         ]);
     }
 }

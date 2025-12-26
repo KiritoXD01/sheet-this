@@ -8,6 +8,7 @@ use App\Enums\UserRoleEnum;
 use App\Models\Company;
 use App\Models\CompanyPolicy;
 use App\Models\Department;
+use App\Models\JobRole;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -36,6 +37,10 @@ final class DatabaseSeeder extends Seeder
         ]);
 
         CompanyPolicy::factory()->create([
+            'company_id' => $company->id,
+        ]);
+
+        JobRole::factory(5)->create([
             'company_id' => $company->id,
         ]);
 

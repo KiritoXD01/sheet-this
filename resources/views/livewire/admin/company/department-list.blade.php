@@ -1,4 +1,4 @@
-<div class="bg-white rounded-2xl shadow-soft border border-slate-100 overflow-hidden">
+<div id="department-container" class="bg-white rounded-2xl shadow-soft border border-slate-100 overflow-hidden">
     <div class="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
         <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
             <span class="material-symbols-outlined text-primary">groups</span>
@@ -9,26 +9,58 @@
             <span class="material-icons text-xs">add</span> New
         </button>
     </div>
-    <div class="divide-y divide-slate-100">
-        @foreach ($departments as $department)
-            <div class="p-4 flex items-center justify-between group hover:bg-slate-50 transition-colors">
-                <div>
-                    <div class="font-medium text-slate-900">{{ $department->name }}</div>
-                    <div class="text-xs text-slate-500">12 Employees</div>
-                </div>
-                <div
-                    class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                    <button class="text-slate-400 hover:text-primary" type="button"
+
+    @forelse ($departments as $department)
+        @if ($loop->first)
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-slate-50/50 border-b border-slate-100">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                Department Name
+                            </th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+        @endif
+
+        <tr class="group hover:bg-slate-50 transition-colors">
+            <td class="px-6 py-4">
+                <div class="font-medium text-slate-900">{{ $department->name }}</div>
+            </td>
+            <td class="px-6 py-4 text-right">
+                <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button class="text-slate-400 hover:text-primary transition-colors" type="button"
                         wire:click="openEditModal({{ $department->id }})">
                         <span class="material-icons text-lg">edit</span>
                     </button>
                 </div>
+            </td>
+        </tr>
+
+        @if ($loop->last)
+                    </tbody>
+                </table>
             </div>
-        @endforeach
-    </div>
-    <div class="p-4 bg-slate-50 border-t border-slate-100 text-center">
-        <button class="text-sm text-primary hover:text-primary-hover font-medium">View all departments</button>
-    </div>
+        @endif
+    @empty
+        <div class="p-12 text-center">
+            <span class="material-symbols-outlined text-slate-300 text-6xl">folder_open</span>
+            <p class="text-slate-500 mt-4 text-sm">No departments yet. Create your first department.</p>
+        </div>
+    @endforelse
+
+    @if ($departments->hasPages())
+        <div class="p-4 border-t border-slate-100">
+            <div wire:scroll="department-container">
+                {{ $departments->links() }}
+            </div>
+        </div>
+    @endif
+
     <x-modal-card :title="$modalTitle" name="cardModal" persistent>
         <form wire:submit="submit" id="departmentForm">
             <x-input type="text" wire:model="departmentName" placeholder="Department Name" />
