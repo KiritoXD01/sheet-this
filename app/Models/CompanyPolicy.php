@@ -7,7 +7,6 @@ namespace App\Models;
 use App\Enums\WorkWeekDaysEnum;
 use Database\Factories\CompanyPolicyFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
-use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -35,7 +34,7 @@ final class CompanyPolicy extends Model
     ];
 
     protected $casts = [
-        'work_week' => AsEnumCollection::class.':'.WorkWeekDaysEnum::class,
+        'work_week' => 'array',
         'overtime_enabled' => 'boolean',
     ];
 
