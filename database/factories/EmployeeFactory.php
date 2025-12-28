@@ -6,12 +6,15 @@ namespace Database\Factories;
 
 use App\Models\Company;
 use App\Models\Department;
+use App\Models\Employee;
+use App\Models\JobRole;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Department>
+ * @extends Factory<Employee>
  */
-final class DepartmentFactory extends Factory
+final class EmployeeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,8 +24,12 @@ final class DepartmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->company(),
+            'user_id' => User::factory(),
             'company_id' => Company::factory(),
+            'department_id' => Department::factory(),
+            'job_role_id' => JobRole::factory(),
+            'employee_code' => fake()->uuid(),
+            'profile_picture' => fake()->image(),
         ];
     }
 }

@@ -24,6 +24,7 @@ use Illuminate\Notifications\Notifiable;
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
  * @property-read Company|null $company
+ * @property-read Employee|null $employee
  */
 #[UseFactory(UserFactory::class)]
 final class User extends Authenticatable
@@ -57,6 +58,15 @@ final class User extends Authenticatable
         return $this->hasOne(
             related: Company::class,
             foreignKey: 'owner_id',
+            localKey: 'id',
+        );
+    }
+
+    public function employee(): HasOne
+    {
+        return $this->hasOne(
+            related: Employee::class,
+            foreignKey: 'user_id',
             localKey: 'id',
         );
     }
