@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read User $owner
  * @property-read Department[] $departments
  * @property-read CompanyPolicy $policy
+ * @property-read JobRole[] $jobRoles
  */
 #[UseFactory(CompanyFactory::class)]
 final class Company extends Model
@@ -54,6 +55,15 @@ final class Company extends Model
     {
         return $this->hasMany(
             related: Department::class,
+            foreignKey: 'company_id',
+            localKey: 'id',
+        );
+    }
+
+    public function jobRoles(): HasMany
+    {
+        return $this->hasMany(
+            related: JobRole::class,
             foreignKey: 'company_id',
             localKey: 'id',
         );
