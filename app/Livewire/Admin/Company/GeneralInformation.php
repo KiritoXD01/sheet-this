@@ -6,6 +6,7 @@ namespace App\Livewire\Admin\Company;
 
 use App\Enums\IndustryEnum;
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;

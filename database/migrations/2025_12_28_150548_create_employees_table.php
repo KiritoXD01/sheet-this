@@ -17,7 +17,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('company_id')->references('id')->on('companies');
+            $table->string('profile_picture')->nullable();
+            $table->string('employee_code')->unique()->nullable();
+            $table->foreignId('job_role_id')->references('id')->on('job_roles')->nullable();
+            $table->foreignId('department_id')->references('id')->on('departments')->nullable();
 
+            $table->unique(['user_id', 'company_id']); // Ensure each user can only be in one company
             $table->timestamps();
         });
     }
