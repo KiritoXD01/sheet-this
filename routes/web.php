@@ -25,20 +25,13 @@ Route::middleware(['auth', 'employee'])
         Route::get('/reports', ReportsController::class)->name('reports');
     });
 
-// Admin onboarding (no company check required)
-Route::middleware(['auth', 'admin'])
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function () {
-        Route::get('/onboarding', OnboardingController::class)->name('onboarding');
-    });
-
 // Protected admin routes (require company via admin.company middleware)
 Route::middleware(['auth', 'admin', 'admin.company'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
         Route::get('/', IndexController::class)->name('index');
+        Route::get('/onboarding', OnboardingController::class)->name('onboarding');
         Route::get('/employees', EmployeeController::class)->name('employees');
         Route::get('/employees/create', CreateEmployeeController::class)->name('employees.create');
         Route::get('/company', CompanyController::class)->name('company');
