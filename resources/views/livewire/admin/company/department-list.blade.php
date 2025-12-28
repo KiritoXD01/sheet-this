@@ -1,11 +1,11 @@
-<div id="department-container" class="bg-white rounded-2xl shadow-soft border border-slate-100 overflow-hidden">
-    <div class="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
-        <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+<div id="department-container" class="bg-white dark:bg-card-dark rounded-2xl shadow-soft border border-slate-100 dark:border-slate-700 overflow-hidden">
+    <div class="p-6 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex justify-between items-center">
+        <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
             <span class="material-symbols-outlined text-primary">groups</span>
             Departments
         </h2>
         <button type="button" wire:click="openCreateModal"
-            class="cursor-pointer text-xs bg-white border border-slate-200 hover:border-primary text-slate-600 px-2 py-1 rounded shadow-sm transition-colors flex items-center gap-1">
+            class="cursor-pointer text-xs bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:border-primary text-slate-600 dark:text-slate-300 px-2 py-1 rounded shadow-sm transition-colors flex items-center gap-1">
             <span class="material-icons text-xs">add</span> New
         </button>
     </div>
@@ -14,22 +14,22 @@
         @if ($loop->first)
             <div class="overflow-x-auto">
                 <table class="w-full">
-                    <thead class="bg-slate-50/50 border-b border-slate-100">
+                    <thead class="bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                                 Department Name
                             </th>
-                            <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
+                            <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                                 Actions
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100">
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
         @endif
 
-        <tr class="group hover:bg-slate-50 transition-colors">
+        <tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
             <td class="px-6 py-4">
-                <div class="font-medium text-slate-900">{{ $department->name }}</div>
+                <div class="font-medium text-slate-900 dark:text-slate-100">{{ $department->name }}</div>
             </td>
             <td class="px-6 py-4 text-right">
                 <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -48,13 +48,13 @@
         @endif
     @empty
         <div class="p-12 text-center">
-            <span class="material-symbols-outlined text-slate-300 text-6xl">folder_open</span>
-            <p class="text-slate-500 mt-4 text-sm">No departments yet. Create your first department.</p>
+            <span class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-6xl">folder_open</span>
+            <p class="text-slate-500 dark:text-slate-400 mt-4 text-sm">No departments yet. Create your first department.</p>
         </div>
     @endforelse
 
     @if ($departments->hasPages())
-        <div class="p-4 border-t border-slate-100">
+        <div class="p-4 border-t border-slate-100 dark:border-slate-700">
             <div wire:scroll="department-container">
                 {{ $departments->links() }}
             </div>

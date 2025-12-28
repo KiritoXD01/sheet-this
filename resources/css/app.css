@@ -29,14 +29,13 @@
 
     --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
     --shadow-glow: 0 0 20px rgba(0, 191, 165, 0.3);
-}
 
-:root {
-    color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        color-scheme: light;
-    }
+    /* Dark mode colors */
+    --color-background-dark: oklch(0.15 0.01 240);
+    --color-card-dark: oklch(0.20 0.01 240);
+    --color-text-dark: oklch(0.95 0 0);
+    --color-border-dark: oklch(0.25 0.01 240);
+    --color-slate-800-dark: oklch(0.22 0.01 240);
+    --shadow-soft-dark: 0 10px 40px -10px rgba(0,0,0,0.4);
+    --shadow-glow-dark: 0 0 20px rgba(0, 191, 165, 0.4);
 }

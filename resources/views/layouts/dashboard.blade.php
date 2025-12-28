@@ -6,7 +6,61 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="color-scheme" content="light" />
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'system';
+
+            function applyTheme(mode) {
+                if (mode === 'dark') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            }
+
+            // Apply initial theme
+            if (theme === 'dark') {
+                applyTheme('dark');
+            } else if (theme === 'light') {
+                applyTheme('light');
+            } else if (theme === 'system') {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                applyTheme(isDark ? 'dark' : 'light');
+            }
+
+            // Create global theme manager
+            window.themeManager = {
+                currentTheme: theme,
+
+                setTheme(newTheme) {
+                    this.currentTheme = newTheme;
+                    localStorage.setItem('theme', newTheme);
+
+                    if (newTheme === 'system') {
+                        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                        applyTheme(isDark ? 'dark' : 'light');
+                    } else {
+                        applyTheme(newTheme);
+                    }
+
+                    // Dispatch custom event for Alpine to update UI
+                    window.dispatchEvent(new CustomEvent('theme-changed', {
+                        detail: { theme: newTheme }
+                    }));
+                },
+
+                applyTheme
+            };
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (window.themeManager.currentTheme === 'system') {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+    </script>
+    <meta name="color-scheme" content="light dark" />
     <title>{{ config('app.name', 'Laravel') }} - Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet" />
@@ -23,20 +77,20 @@
     @endif
 </head>
 
-<body class="bg-background-light text-slate-800 antialiased min-h-screen flex flex-col">
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col">
     <x-notifications />
     <livewire:dashboard.header />
     <main class="grow pt-28 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         @yield('content')
     </main>
-    <footer class="bg-white border-t border-slate-100 py-8">
+    <footer class="bg-white dark:bg-card-dark border-t border-slate-100 dark:border-slate-700 py-8">
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-sm text-slate-500">
+            <div class="text-sm text-slate-500 dark:text-slate-400">
                 © 2025 <a href="https://sheetthis.com" target="_blank">Sheet This</a>. All rights
                 reserved.
             </div>
-            <div class="flex gap-6 text-sm text-slate-500">
+            <div class="flex gap-6 text-sm text-slate-500 dark:text-slate-400">
                 <a class="hover:text-primary transition-colors" href="#">Help Center</a>
                 <a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
                 <a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
