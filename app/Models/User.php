@@ -20,7 +20,7 @@ use Illuminate\Notifications\Notifiable;
  * @property-read string $password
  * @property-read UserRoleEnum $role
  * @property-read Carbon|null $email_verified_at
- * @property-read string|null $remember_token
+ * @property-read Carbon|null $terms_agreed_at * @property-read string|null $remember_token
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
  * @property-read Company|null $company
@@ -41,6 +41,7 @@ final class User extends Authenticatable
         'email',
         'password',
         'role',
+        'terms_agreed_at',
     ];
 
     /**
@@ -82,6 +83,7 @@ final class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'role' => UserRoleEnum::class,
+            'terms_agreed_at' => 'datetime',
         ];
     }
 }

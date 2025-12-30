@@ -18,7 +18,7 @@ final class Policy extends Component
     public array $timezones = [];
 
     #[Validate(['required', 'timezone'])]
-    public string $timezone = '';
+    public ?string $timezone = null;
 
     #[Validate(['required', 'integer', 'min:1', 'max:24'])]
     public int $standardWorkDay = 8;
@@ -36,10 +36,10 @@ final class Policy extends Component
         /** @var Company */
         $company = Auth::user()->company;
 
-        $this->timezone = $company->policy->default_time_zone;
-        $this->standardWorkDay = $company->policy->standard_work_day;
-        $this->workWeek = $company->policy->work_week;
-        $this->allowOvertime = $company->policy->overtime_enabled;
+        $this->timezone = $company->policy->default_time_zone ?? null;
+        $this->standardWorkDay = $company->policy->standard_work_day ?? 8;
+        $this->workWeek = $company->policy->work_week ?? [];
+        $this->allowOvertime = $company->policy->overtime_enabled ?? false;
     }
 
     public function toggleWorkDay(string $day): void
@@ -58,12 +58,12 @@ final class Policy extends Component
         /** @var Company */
         $company = Auth::user()->company;
 
-        $company->policy->updateOrInsert(
+        $company->policy()->updateOrInsert(
             ['company_id' => $company->id],
             [
                 'default_time_zone' => $this->timezone,
                 'standard_work_day' => $this->standardWorkDay,
-                'work_week' => $this->workWeek,
+                'work_week' => json_encode($this->workWeek),
                 'overtime_enabled' => $this->allowOvertime,
             ]
         );

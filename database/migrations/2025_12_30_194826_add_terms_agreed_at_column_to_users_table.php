@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('owner_id')->unique()->references('id')->on('users');
-            $table->string('name');
-            $table->string('industry')->nullable();
-            $table->string('logo')->nullable();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->timestamp('terms_agreed_at')->after('email')->nullable();
         });
     }
 
@@ -28,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('terms_agreed_at');
+        });
     }
 };

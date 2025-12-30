@@ -34,6 +34,7 @@ final class UserFactory extends Factory
             'password' => self::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'role' => UserRoleEnum::random(),
+            'terms_agreed_at' => null,
         ];
     }
 

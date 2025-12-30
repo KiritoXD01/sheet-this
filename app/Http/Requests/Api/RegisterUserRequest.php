@@ -6,6 +6,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 final class RegisterUserRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ final class RegisterUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +26,10 @@ final class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'full_name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'email', 'max:100', 'unique:users,email'],
+            'terms_agreed' => ['required', 'boolean'],
+            'password' => ['required', 'confirmed', Password::defaults()],
         ];
     }
 }

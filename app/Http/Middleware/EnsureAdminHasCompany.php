@@ -6,8 +6,8 @@ namespace App\Http\Middleware;
 
 use App\Models\User;
 use Closure;
-use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 final class EnsureAdminHasCompany
@@ -17,8 +17,11 @@ final class EnsureAdminHasCompany
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next, #[CurrentUser] User $user): Response
+    public function handle(Request $request, Closure $next): Response
     {
+        /** @var User */
+        $user = Auth::user();
+
         if (! $user->company) {
             return redirect()->route('admin.onboarding');
         }
