@@ -5,7 +5,8 @@
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
             <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100">Dashboard</h1>
-            <p class="text-slate-500 dark:text-slate-400 mt-1">Welcome back! {{ Auth::user()->name }} Here's what's happening today.</p>
+            <p class="text-slate-500 dark:text-slate-400 mt-1">Welcome back! {{ $name }} Here's what's happening
+                today.</p>
         </div>
         <div
             class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 bg-white dark:bg-card-dark px-4 py-2 rounded-lg border border-slate-100 dark:border-slate-700 shadow-sm">
@@ -14,7 +15,8 @@
         </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div class="bg-white dark:bg-card-dark rounded-xl p-6 shadow-soft border border-slate-100 dark:border-slate-700 relative overflow-hidden group">
+        <div
+            class="bg-white dark:bg-card-dark rounded-xl p-6 shadow-soft border border-slate-100 dark:border-slate-700 relative overflow-hidden group">
             <div
                 class="absolute top-0 right-0 w-24 h-24 bg-primary/5 dark:bg-primary/10 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
             </div>
@@ -81,14 +83,16 @@
                     <span class="material-icons text-orange-500">my_location</span>
                 </div>
             </div>
-            <div class="flex items-center gap-2 mt-2 bg-slate-50 dark:bg-slate-800 p-2 rounded border border-slate-100 dark:border-slate-700">
+            <div
+                class="flex items-center gap-2 mt-2 bg-slate-50 dark:bg-slate-800 p-2 rounded border border-slate-100 dark:border-slate-700">
                 <span class="material-icons text-slate-400 text-sm">place</span>
                 <span class="text-xs text-slate-600 dark:text-slate-300 truncate">Home Office (Verified IP)</span>
             </div>
         </div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-1 bg-white dark:bg-card-dark rounded-2xl shadow-soft border border-slate-100 dark:border-slate-700 overflow-hidden">
+        <div
+            class="lg:col-span-1 bg-white dark:bg-card-dark rounded-2xl shadow-soft border border-slate-100 dark:border-slate-700 overflow-hidden">
             <div class="p-6 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
                 <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                     <span class="material-symbols-outlined text-primary">beach_access</span>
@@ -138,8 +142,10 @@
                 </div>
             </div>
         </div>
-        <div class="lg:col-span-2 bg-white dark:bg-card-dark rounded-2xl shadow-soft border border-slate-100 dark:border-slate-700 flex flex-col">
-            <div class="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+        <div
+            class="lg:col-span-2 bg-white dark:bg-card-dark rounded-2xl shadow-soft border border-slate-100 dark:border-slate-700 flex flex-col">
+            <div
+                class="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
                 <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                     <span class="material-symbols-outlined text-slate-400">history</span>
                     Recent Requests
@@ -148,7 +154,8 @@
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-                    <thead class="bg-slate-50 dark:bg-slate-800 text-xs uppercase font-semibold text-slate-500 dark:text-slate-400">
+                    <thead
+                        class="bg-slate-50 dark:bg-slate-800 text-xs uppercase font-semibold text-slate-500 dark:text-slate-400">
                         <tr>
                             <th class="px-6 py-4">Type</th>
                             <th class="px-6 py-4">Dates</th>
@@ -225,7 +232,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="grow flex items-center justify-center p-8 border-t border-slate-100 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-800/30">
+            <div
+                class="grow flex items-center justify-center p-8 border-t border-slate-100 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-800/30">
                 <p class="text-xs text-slate-400">Showing last 3 months of activity</p>
             </div>
         </div>

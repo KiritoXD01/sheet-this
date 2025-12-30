@@ -7,8 +7,8 @@ namespace App\Http\Middleware;
 use App\Enums\UserRoleEnum;
 use App\Models\User;
 use Closure;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 final class AdminMiddleware
@@ -18,11 +18,8 @@ final class AdminMiddleware
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, #[CurrentUser] User $user): Response
     {
-        /** @var User */
-        $user = Auth::user();
-
         if ($user->role !== UserRoleEnum::ADMIN) {
             return redirect()->route('dashboard.index');
         }
