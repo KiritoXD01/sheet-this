@@ -16,5 +16,6 @@ enum PosthogEventEnum: string
     case OPENED_ADMIN_COMPANY = 'opened_admin_company';
     case OPENED_ADMIN_EMPLOYEES = 'opened_admin_employees';
     case OPENED_ADMIN_CREATE_EMPLOYEE = 'opened_admin_create_employee';
+    case OPENED_ADMIN_SHOW_EMPLOYEE = 'opened_admin_show_employee';
     case OPENED_ADMIN_ONBOARDING = 'opened_admin_onboarding';
 }

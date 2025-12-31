@@ -24,7 +24,7 @@ final class EmployeeController extends Controller
         $employees = Employee::query()
             ->with(['user', 'department', 'jobRole'])
             ->where('company_id', $user->company->id)
-            ->paginate(perPage: 10);
+            ->paginate(perPage: 8);
 
         return view('admin.employees.index', compact('employees'));
     }

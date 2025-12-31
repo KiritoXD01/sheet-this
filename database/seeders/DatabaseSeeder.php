@@ -10,7 +10,6 @@ use App\Models\CompanyPolicy;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\JobRole;
-use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -25,25 +24,44 @@ final class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create admin user
-        User::factory()
-            ->has(
-                factory: Company::factory()
-                    ->has(Department::factory(5))
-                    ->has(JobRole::factory(5))
-                    ->has(Employee::factory(10), 'employees')
-                    ->has(
-                        factory: CompanyPolicy::factory(),
-                        relationship: 'policy'
-                    )
-                    ->has(
-                        factory: Project::factory(5),
-                        relationship: 'projects'
-                    ),
-                relationship: 'company'
-            )
+        $user = User::factory()
             ->create([
                 'email' => 'admin@test.com',
                 'role' => UserRoleEnum::ADMIN,
             ]);
+
+        // Create a company
+        $company = Company::factory()->create([
+            'owner_id' => $user->id,
+        ]);
+
+        // Create Company Policy
+        CompanyPolicy::factory()->create([
+            'company_id' => $company->id,
+        ]);
+
+        // Create Departments
+        $departments = Department::factory(5)->create([
+            'company_id' => $company->id,
+        ]);
+
+        // Create Job Roles
+        $jobRoles = JobRole::factory(5)->create([
+            'company_id' => $company->id,
+        ]);
+
+        // Create Employees
+        $users = User::factory(10)->create([
+            'role' => UserRoleEnum::EMPLOYEE,
+        ]);
+
+        foreach ($users as $user) {
+            Employee::factory()->create([
+                'user_id' => $user->id,
+                'company_id' => $company->id,
+                'department_id' => $departments->random()->id,
+                'job_role_id' => $jobRoles->random()->id,
+            ]);
+        }
     }
 }
