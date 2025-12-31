@@ -8,6 +8,7 @@ use App\Enums\UserRoleEnum;
 use App\Models\Company;
 use App\Models\CompanyPolicy;
 use App\Models\Department;
+use App\Models\Employee;
 use App\Models\JobRole;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,7 +23,7 @@ final class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()
+        $user = User::factory()
             ->has(
                 factory: Company::factory()
                     ->has(Department::factory(5))
@@ -36,6 +37,12 @@ final class DatabaseSeeder extends Seeder
             ->create([
                 'email' => 'admin@test.com',
                 'role' => UserRoleEnum::ADMIN,
+            ]);
+
+        Employee::factory()
+            ->for(factory: $user, relationship: 'user')
+            ->create([
+                'company_id' => $user->company->id,
             ]);
     }
 }

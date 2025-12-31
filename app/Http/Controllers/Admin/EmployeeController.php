@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use App\DTO\PosthogCaptureEventDTO;
 use App\Enums\PosthogEventEnum;
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use App\Models\User;
 use App\Services\PosthogService;
 use Illuminate\Container\Attributes\CurrentUser;
@@ -20,6 +21,11 @@ final class EmployeeController extends Controller
             'event' => PosthogEventEnum::OPENED_ADMIN_EMPLOYEES,
         ]));
 
-        return view('admin.employees.index');
+        $employees = Employee::query()
+            ->with(['user', 'department', 'jobRole'])
+            ->where('company_id', $user->company->id)
+            ->paginate(perPage: 10);
+
+        return view('admin.employees.index', compact('employees'));
     }
 }

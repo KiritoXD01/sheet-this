@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreignId('company_id')->references('id')->on('companies');
             $table->string('profile_picture')->nullable();
             $table->string('employee_code')->unique()->nullable();
-            $table->foreignId('job_role_id')->references('id')->on('job_roles')->nullable();
-            $table->foreignId('department_id')->references('id')->on('departments')->nullable();
+            $table->foreignId('job_role_id')->nullable()->references('id')->on('job_roles');
+            $table->foreignId('department_id')->nullable()->references('id')->on('departments');
 
             $table->unique(['user_id', 'company_id']); // Ensure each user can only be in one company
             $table->timestamps();
