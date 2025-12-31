@@ -13,15 +13,19 @@
             <li>
                 <div class="flex items-center">
                     <span class="material-icons text-slate-400 text-lg">chevron_right</span>
-                    <span class="ml-1 text-sm font-medium text-slate-900 md:ml-2 dark:text-white">Jane Cooper</span>
+                    <span class="ml-1 text-sm font-medium text-slate-900 md:ml-2 dark:text-white">
+                        {{ $employee->user->name }}
+                    </span>
                 </div>
             </li>
         </ol>
     </nav>
     <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
         <div>
-            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Jane Cooper</h1>
-            <p class="text-slate-500 dark:text-slate-400 mt-1">Software Developer • Engineering Department</p>
+            <h1 class="text-3xl font-bold text-slate-900 dark:text-white">{{ $employee->user->name }}</h1>
+            <p class="text-slate-500 dark:text-slate-400 mt-1">
+                {{ $employee->jobRole->name }} • {{ $employee->department->name }}
+            </p>
         </div>
         <div class="flex items-center gap-3">
             <button
@@ -42,7 +46,7 @@
             <span class="material-icons text-9xl text-slate-900 dark:text-white">badge</span>
         </div>
         <div class="flex flex-col md:flex-row gap-8 relative z-10">
-            <div class="flex-shrink-0 flex flex-col items-center">
+            <div class="shrink-0 flex flex-col items-center">
                 <div
                     class="h-32 w-32 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-4xl font-bold border-4 border-white dark:border-card-dark shadow-md mb-4">
                     JC
@@ -53,17 +57,13 @@
                     Active Employee
                 </span>
             </div>
-            <div class="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+            <div class="grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
                 <div class="space-y-4">
                     <div>
                         <p class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Contact Information</p>
                         <div class="flex items-center gap-2 text-slate-700 dark:text-slate-300 mb-1">
                             <span class="material-icons text-slate-400 text-sm">email</span>
-                            <span>jane.cooper@example.com</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                            <span class="material-icons text-slate-400 text-sm">phone</span>
-                            <span>+1 (555) 000-0000</span>
+                            <span>{{ $employee->user->email }}</span>
                         </div>
                     </div>
                     <div>
@@ -79,19 +79,7 @@
                         <p class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Employment Details</p>
                         <div class="flex items-center gap-2 text-slate-700 dark:text-slate-300 mb-1">
                             <span class="material-icons text-slate-400 text-sm">badge</span>
-                            <span>ID: EMP-2025-001</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-                            <span class="material-icons text-slate-400 text-sm">calendar_today</span>
-                            <span>Joined: Jan 15, 2023</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Reports To</p>
-                        <div class="flex items-center gap-2">
-                            <img alt="Supervisor" class="w-6 h-6 rounded-full"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjymFyZ7SrHdz9d_gfg2AcV943YmVngNpXAJlGypqcUjoZUJlBkU3n55-fBMx_5xcaUvkjGQZqZPQW8DwO7f5I0ax5SPygkr1fKEg1mfCsygvx9i_Z30KqgcrkAVtU53XMHJA3enWrcX64SyYgEPHwlZ5SgnQc4d0uy_0UPCLDdjgZqbxGBansyqVKNdTDF9Ol6isL7G71Koun01Cjy3dMqIGIrm7j2havEq68ohLJe9PNUYPXEwjuvVoWub8f8DJg6T6-ctLJx04" />
-                            <span class="text-slate-700 dark:text-slate-300">Robert Fox</span>
+                            <span>ID: {{ $employee->employee_code }}</span>
                         </div>
                     </div>
                 </div>
@@ -240,30 +228,10 @@
                     </table>
                 </div>
             </div>
-            <div
-                class="bg-white dark:bg-card-dark rounded-xl shadow-soft border border-slate-100 dark:border-slate-800 p-6">
-                <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-4">Manager Notes</h3>
-                <div class="flex gap-4">
-                    <div class="flex-shrink-0">
-                        <img alt="Supervisor" class="w-10 h-10 rounded-full"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqsDgE6-axS-N9IfhayKxH7wsAFlBLtzmU7elYGPvf8LNUuh5d2XcPx3Qz5d7-AGVo9WwlzSwpknOV4sTGx1DXjgm1VUMZjtJwpO2Xen35_iFl-R246fFFcs29By00aBLBwGfxEWFGGWbIYGcvMPmMbl2WS7D2vuBn5RpzL1DlKaQfoPes-CbAdnjHXl9xv2937gc3zhpTptG637TcxHXb5Kh9R8h22MqmPTObwEolCxtlhC_YGV21iYzFazVJnvvwpwJk59mInWA" />
-                    </div>
-                    <div class="flex-grow">
-                        <textarea
-                            class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-primary focus:border-primary text-sm p-3"
-                            placeholder="Add a note for this employee..." rows="3"></textarea>
-                        <div class="flex justify-end mt-2">
-                            <button
-                                class="px-3 py-1.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded text-xs font-medium hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">Save
-                                Note</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="space-y-6">
             <div
-                class="bg-gradient-to-br from-slate-900 to-slate-800 dark:from-card-dark dark:to-slate-900 rounded-xl shadow-lg p-6 text-white relative overflow-hidden group">
+                class="bg-linear-to-br from-slate-900 to-slate-800 dark:from-card-dark dark:to-slate-900 rounded-xl shadow-lg p-6 text-white relative overflow-hidden group">
                 <div
                     class="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all duration-700">
                 </div>
@@ -368,28 +336,6 @@
                             <div class="bg-amber-400 h-2 rounded-full" style="width: 20%"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div
-                class="bg-white dark:bg-card-dark rounded-xl shadow-soft border border-slate-100 dark:border-slate-800 p-6">
-                <h3 class="font-bold text-slate-900 dark:text-white mb-4">Assigned Projects</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span
-                        class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                        Project Phoenix
-                    </span>
-                    <span
-                        class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                        Website Redesign
-                    </span>
-                    <span
-                        class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                        Mobile App v2
-                    </span>
-                    <button
-                        class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border border-dashed border-slate-300 text-slate-500 hover:text-primary hover:border-primary transition-colors">
-                        + Assign
-                    </button>
                 </div>
             </div>
         </div>

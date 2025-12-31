@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
+use App\Models\Company;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +19,11 @@ final class EnsureAdminHasCompany
      */
     public function handle(Request $request, Closure $next): Response
     {
-        /** @var User */
-        $user = Auth::user();
+        $user_id = Auth::id();
 
-        if (! $user->company) {
+        $companyExists = Company::query()->where('owner_id', $user_id)->exists();
+
+        if (! $companyExists) {
             return redirect()->route('admin.onboarding');
         }
 
