@@ -10,6 +10,7 @@ use App\Models\CompanyPolicy;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\JobRole;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,26 +24,26 @@ final class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::factory()
+        // Create admin user
+        User::factory()
             ->has(
                 factory: Company::factory()
                     ->has(Department::factory(5))
                     ->has(JobRole::factory(5))
+                    ->has(Employee::factory(10), 'employees')
                     ->has(
                         factory: CompanyPolicy::factory(),
                         relationship: 'policy'
+                    )
+                    ->has(
+                        factory: Project::factory(5),
+                        relationship: 'projects'
                     ),
                 relationship: 'company'
             )
             ->create([
                 'email' => 'admin@test.com',
                 'role' => UserRoleEnum::ADMIN,
-            ]);
-
-        Employee::factory()
-            ->for(factory: $user, relationship: 'user')
-            ->create([
-                'company_id' => $user->company->id,
             ]);
     }
 }

@@ -70,7 +70,7 @@ final class Create extends Component
             'role' => UserRoleEnum::EMPLOYEE,
         ]);
 
-        $employee = Employee::query()->create([
+        Employee::query()->create([
             'job_role_id' => $this->job_role_id,
             'department_id' => $this->department_id,
             'employee_code' => $this->employee_code,
@@ -78,7 +78,7 @@ final class Create extends Component
             'company_id' => $currentUser->company->id,
         ]);
 
-        Session::flash('employee-created', 'Employee created successfully');
+        Session::flash('employee-created', "Employee {$user->name} has been created successfully");
 
         $this->redirect(route('admin.employees'));
     }
