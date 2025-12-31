@@ -19,13 +19,14 @@
                     @endif
                 @endforeach
             </div>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
                 <button
                     class="bg-slate-100 dark:bg-slate-800 p-2 rounded-full text-slate-500 dark:text-slate-400 hover:text-primary transition-colors relative">
                     <span class="material-icons">notifications</span>
                     <span
                         class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-card-dark"></span>
                 </button>
+                <x-theme-toggle />
                 <livewire:dashboard.profile-dropdown />
             </div>
         </div>

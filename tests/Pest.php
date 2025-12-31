@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -14,8 +16,18 @@ declare(strict_types=1);
 */
 
 pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->use(RefreshDatabase::class)
+    ->in('Feature', 'Browser', 'Unit');
+
+/*
+|--------------------------------------------------------------------------
+| Browser Tests
+|--------------------------------------------------------------------------
+|
+| Configure browser tests to run on Chrome, Firefox, and Safari for comprehensive
+| cross-browser testing coverage. This configuration will be used in browser tests.
+|
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -32,18 +44,120 @@ expect()->extend('toBeOne', function () {
     return $this->toBe(1);
 });
 
+expect()->extend('toBeValidEmail', function () {
+    return $this->toMatch('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/');
+});
+
+expect()->extend('toBeValidTimezone', function () {
+    $timezones = DateTimeZone::listIdentifiers();
+
+    return $this->toBeIn($timezones);
+});
+
 /*
 |--------------------------------------------------------------------------
-| Functions
+| Helper Functions
 |--------------------------------------------------------------------------
 |
-| While Pest is very powerful out-of-the-box, you may have some testing code specific to your
-| project that you don't want to repeat in every file. Here you can also expose helpers as
-| global functions to help you to reduce the number of lines of code in your test files.
+| Global helper functions to simplify test setup and reduce code duplication.
 |
 */
 
-function something()
+function createAdminWithCompany(): array
 {
-    // ..
+    $admin = App\Models\User::factory()->create([
+        'role' => App\Enums\UserRoleEnum::ADMIN,
+        'password' => 'password',
+    ]);
+
+    $company = App\Models\Company::factory()->create([
+        'owner_id' => $admin->id,
+    ]);
+
+    App\Models\CompanyPolicy::factory()->create([
+        'company_id' => $company->id,
+    ]);
+
+    return compact('admin', 'company');
 }
+
+function createEmployeeUser(): array
+{
+    $user = App\Models\User::factory()->create([
+        'role' => App\Enums\UserRoleEnum::EMPLOYEE,
+        'password' => 'password',
+    ]);
+
+    $company = App\Models\Company::factory()->create();
+
+    $employee = App\Models\Employee::factory()->create([
+        'user_id' => $user->id,
+        'company_id' => $company->id,
+    ]);
+
+    return compact('user', 'company', 'employee');
+}
+
+function createDepartmentForCompany(App\Models\Company $company, ?string $name = null): App\Models\Department
+{
+    return App\Models\Department::factory()->create([
+        'company_id' => $company->id,
+        'name' => $name ?? fake()->company(),
+    ]);
+}
+
+function createJobRoleForCompany(App\Models\Company $company, ?string $name = null): App\Models\JobRole
+{
+    return App\Models\JobRole::factory()->create([
+        'company_id' => $company->id,
+        'name' => $name ?? fake()->jobTitle(),
+    ]);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Shared Datasets
+|--------------------------------------------------------------------------
+|
+| Define common datasets used across multiple tests to reduce duplication.
+|
+*/
+
+dataset('user_roles', [
+    App\Enums\UserRoleEnum::ADMIN,
+    App\Enums\UserRoleEnum::EMPLOYEE,
+]);
+
+dataset('industries', [
+    App\Enums\IndustryEnum::TECHNOLOGY,
+    App\Enums\IndustryEnum::FINANCE,
+    App\Enums\IndustryEnum::HEALTHCARE,
+    App\Enums\IndustryEnum::RETAIL,
+    App\Enums\IndustryEnum::OTHER,
+]);
+
+dataset('work_week_days', [
+    App\Enums\WorkWeekDaysEnum::MONDAY,
+    App\Enums\WorkWeekDaysEnum::TUESDAY,
+    App\Enums\WorkWeekDaysEnum::WEDNESDAY,
+    App\Enums\WorkWeekDaysEnum::THURSDAY,
+    App\Enums\WorkWeekDaysEnum::FRIDAY,
+    App\Enums\WorkWeekDaysEnum::SATURDAY,
+    App\Enums\WorkWeekDaysEnum::SUNDAY,
+]);
+
+dataset('invalid_emails', [
+    'plaintext',
+    '@example.com',
+    'user@',
+    'user @example.com',
+    'user@.com',
+]);
+
+dataset('valid_timezones', [
+    'UTC',
+    'America/New_York',
+    'America/Los_Angeles',
+    'Europe/London',
+    'Asia/Tokyo',
+]);

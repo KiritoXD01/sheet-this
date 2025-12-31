@@ -21,26 +21,72 @@
     @else
         <link href="{{ asset('tailwind.css') }}" rel="stylesheet">
     @endif
+    <script>
+        // Theme management script - handles light, dark, and system preferences
+        (function() {
+            const theme = localStorage.getItem('theme') || 'system';
+
+            function applyTheme(theme) {
+                const root = document.documentElement;
+
+                if (theme === 'dark') {
+                    root.classList.add('dark');
+                } else if (theme === 'light') {
+                    root.classList.remove('dark');
+                } else if (theme === 'system') {
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    if (prefersDark) {
+                        root.classList.add('dark');
+                    } else {
+                        root.classList.remove('dark');
+                    }
+                }
+            }
+
+            // Apply theme immediately to prevent flash
+            applyTheme(theme);
+
+            // Listen for theme changes from other tabs or the toggle
+            window.addEventListener('storage', (e) => {
+                if (e.key === 'theme') {
+                    applyTheme(e.newValue || 'system');
+                }
+            });
+
+            // Listen for system preference changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                const currentTheme = localStorage.getItem('theme') || 'system';
+                if (currentTheme === 'system') {
+                    applyTheme('system');
+                }
+            });
+
+            // Listen for custom theme-changed events from Alpine components
+            document.addEventListener('theme-changed', (e) => {
+                applyTheme(e.detail.theme);
+            });
+        })();
+    </script>
 </head>
 
-<body class="bg-background-light text-slate-800 antialiased min-h-screen flex flex-col">
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-text-dark antialiased min-h-screen flex flex-col">
     <x-notifications />
     <livewire:dashboard.header />
     <main class="grow pt-28 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         @yield('content')
     </main>
-    <footer class="bg-white border-t border-slate-100 py-8">
+    <footer class="bg-white dark:bg-card-dark border-t border-slate-100 dark:border-border-dark py-8">
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-sm text-slate-500">
-                © 2025 <a href="https://sheetthis.com" target="_blank">Sheet This</a>. All rights
+            <div class="text-sm text-slate-500 dark:text-slate-400">
+                © 2025 <a href="https://sheetthis.com" target="_blank" class="hover:text-primary dark:hover:text-primary transition-colors">Sheet This</a>. All rights
                 reserved.
             </div>
-            <div class="flex gap-6 text-sm text-slate-500">
-                <a class="hover:text-primary transition-colors" href="https://sheetthis.com/privacy" target="_blank">
+            <div class="flex gap-6 text-sm text-slate-500 dark:text-slate-400">
+                <a class="hover:text-primary dark:hover:text-primary transition-colors" href="https://sheetthis.com/privacy" target="_blank">
                     Privacy Policy
                 </a>
-                <a class="hover:text-primary transition-colors" href="https://sheetthis.com/terms" target="_blank">
+                <a class="hover:text-primary dark:hover:text-primary transition-colors" href="https://sheetthis.com/terms" target="_blank">
                     Terms of Service
                 </a>
             </div>
