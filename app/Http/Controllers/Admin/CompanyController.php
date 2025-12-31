@@ -4,13 +4,22 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
+use App\DTO\PosthogCaptureEventDTO;
+use App\Enums\PosthogEventEnum;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Services\PosthogService;
+use Illuminate\Container\Attributes\CurrentUser;
 
 final class CompanyController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(#[CurrentUser] User $user)
     {
+        PosthogService::capture(PosthogCaptureEventDTO::from([
+            'distinctId' => $user->email,
+            'event' => PosthogEventEnum::OPENED_ADMIN_COMPANY,
+        ]));
+
         return view('admin.company.index');
     }
 }

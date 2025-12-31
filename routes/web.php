@@ -14,7 +14,7 @@ use App\Http\Controllers\Dashboard\TimesheetController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login')->name('home');
-Route::get('/login', LoginController::class)->name('login');
+Route::get('/login', LoginController::class)->middleware('guest')->name('login');
 
 Route::middleware(['auth', 'employee'])
     ->prefix('dashboard')
