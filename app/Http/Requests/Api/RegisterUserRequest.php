@@ -15,7 +15,24 @@ final class RegisterUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // Allow requests in non-production environments
+        if (! app()->isProduction()) {
+            return true;
+        }
+
+        $origin = $this->header('Origin');
+        $referer = $this->header('Referer');
+
+        // Check if Origin or Referer header contains sheetthis.com domain
+        if ($origin && str_ends_with(parse_url($origin, PHP_URL_HOST) ?? '', 'sheetthis.com')) {
+            return true;
+        }
+
+        if ($referer && str_ends_with(parse_url($referer, PHP_URL_HOST) ?? '', 'sheetthis.com')) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
