@@ -7,28 +7,30 @@
             <p class="text-slate-500 dark:text-slate-400 mt-1">Review, edit, and submit your weekly hours.</p>
         </div>
         <div class="flex items-center gap-3">
-            <div class="flex items-center gap-2 bg-white dark:bg-card-dark p-1 rounded-lg border border-slate-100 dark:border-slate-700 shadow-sm">
-                <button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md text-slate-500 dark:text-slate-400 transition-colors">
+            <div
+                class="flex items-center gap-2 bg-white dark:bg-card-dark p-1 rounded-lg border border-slate-100 dark:border-slate-700 shadow-sm">
+                <button
+                    class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md text-slate-500 dark:text-slate-400 transition-colors">
                     <span class="material-icons">chevron_left</span>
                 </button>
-                <div class="px-4 py-1 flex items-center gap-2 font-medium text-slate-700 dark:text-slate-200 w-48 justify-center">
+                <div
+                    class="px-4 py-1 flex items-center gap-2 font-medium text-slate-700 dark:text-slate-200 w-48 justify-center">
                     <span class="material-icons text-primary text-sm">date_range</span>
-                    <span>Oct 23 - Oct 29, 2025</span>
+                    <span>Oct 23 - Oct 29</span>
                 </div>
-                <button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md text-slate-500 dark:text-slate-400 transition-colors">
+                <button
+                    class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md text-slate-500 dark:text-slate-400 transition-colors">
                     <span class="material-icons">chevron_right</span>
                 </button>
             </div>
-            <button
-                class="hidden md:flex bg-white dark:bg-card-dark text-slate-600 dark:text-slate-300 px-4 py-2.5 rounded-lg border border-slate-100 dark:border-slate-700 hover:text-primary transition-colors font-medium text-sm items-center gap-2 shadow-sm">
-                <span class="material-icons text-sm">print</span> Print
-            </button>
         </div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <div class="lg:col-span-3 space-y-6">
-            <div class="bg-white dark:bg-card-dark rounded-xl shadow-soft border border-slate-100 dark:border-slate-700 overflow-hidden flex flex-col">
-                <div class="p-5 border-b border-slate-100 dark:border-slate-700 flex flex-wrap justify-between items-center bg-slate-50/50 dark:bg-slate-800/50 gap-4">
+            <div
+                class="bg-white dark:bg-card-dark rounded-xl shadow-soft border border-slate-100 dark:border-slate-700 overflow-hidden flex flex-col">
+                <div
+                    class="p-5 border-b border-slate-100 dark:border-slate-700 flex flex-wrap justify-between items-center bg-slate-50/50 dark:bg-slate-800/50 gap-4">
                     <div class="flex items-center gap-3">
                         <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                             <span class="material-symbols-outlined text-slate-400">edit_calendar</span>
@@ -251,27 +253,29 @@
                                 </td>
                             </tr>
                         </tbody>
-                        <tfoot class="bg-slate-50 border-t border-slate-100">
+                        <tfoot class="bg-slate-50 dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700">
                             <tr>
                                 <td class="px-4 py-4 text-right" colspan="5">
-                                    <div class="text-sm font-semibold text-slate-500">Total Hours</div>
-                                    <div class="text-xs text-slate-400 font-normal">Regular: 32.50 | Overtime: 0.00</div>
+                                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400">Total Hours</div>
+                                    <div class="text-xs text-slate-400 dark:text-slate-500 font-normal">Regular: 32.50 |
+                                        Overtime: 0.00</div>
                                 </td>
                                 <td class="px-4 py-4 text-right">
-                                    <div class="font-mono font-bold text-slate-900 text-xl">32.50</div>
+                                    <div class="font-mono font-bold text-slate-900 dark:text-slate-100 text-xl">32.50</div>
                                 </td>
                                 <td></td>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
-                <div class="p-6 border-t border-slate-100 flex justify-between items-center bg-white">
+                <div
+                    class="p-6 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center bg-white dark:bg-slate-900">
                     <button class="text-red-500 hover:text-red-700 text-sm font-medium transition-colors">
                         Clear All
                     </button>
                     <div class="flex gap-3">
                         <button
-                            class="px-6 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-lg transition-colors border border-transparent hover:border-slate-200">
+                            class="px-6 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors border border-transparent hover:border-slate-200 dark:hover:border-slate-600">
                             Save Draft
                         </button>
                         <button
@@ -293,7 +297,8 @@
             </div>
         </div>
         <div class="lg:col-span-1 space-y-6">
-            <div class="bg-white dark:bg-card-dark rounded-xl shadow-soft border border-slate-100 dark:border-slate-700 p-6">
+            <div
+                class="bg-white dark:bg-card-dark rounded-xl shadow-soft border border-slate-100 dark:border-slate-700 p-6">
                 <h3
                     class="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-6 flex items-center justify-between">
                     Summary
@@ -306,10 +311,11 @@
                                 <span class="text-xs font-semibold inline-block text-primary uppercase">Billable</span>
                             </div>
                             <div class="text-right">
-                                <span class="text-xs font-semibold inline-block text-slate-600 dark:text-slate-300">28.0h</span>
+                                <span
+                                    class="text-xs font-semibold inline-block text-slate-600 dark:text-slate-300">28.0h</span>
                             </div>
                         </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-slate-100">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-slate-100 dark:bg-slate-700">
                             <div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary"
                                 style="width: 86%"></div>
                         </div>
@@ -321,72 +327,75 @@
                                     class="text-xs font-semibold inline-block text-blue-500 uppercase">Non-Billable</span>
                             </div>
                             <div class="text-right">
-                                <span class="text-xs font-semibold inline-block text-slate-600 dark:text-slate-300">4.5h</span>
+                                <span
+                                    class="text-xs font-semibold inline-block text-slate-600 dark:text-slate-300">4.5h</span>
                             </div>
                         </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-slate-100">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-slate-100 dark:bg-slate-700">
                             <div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"
                                 style="width: 14%"></div>
                         </div>
                     </div>
                 </div>
-                <div class="mt-6 pt-6 border-t border-slate-100 grid grid-cols-2 gap-4">
-                    <div class="bg-slate-50 p-3 rounded-lg text-center">
-                        <div class="text-xs text-slate-500 mb-1">Utilization</div>
-                        <div class="text-lg font-bold text-slate-900">86%</div>
+                <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-700 grid grid-cols-2 gap-4">
+                    <div class="bg-slate-50 dark:bg-slate-800 p-3 rounded-lg text-center">
+                        <div class="text-xs text-slate-500 dark:text-slate-400 mb-1">Utilization</div>
+                        <div class="text-lg font-bold text-slate-900 dark:text-slate-100">86%</div>
                     </div>
-                    <div class="bg-slate-50 p-3 rounded-lg text-center">
-                        <div class="text-xs text-slate-500 mb-1">Total Pay</div>
-                        <div class="text-lg font-bold text-slate-900">$1.4k</div>
+                    <div class="bg-slate-50 dark:bg-slate-800 p-3 rounded-lg text-center">
+                        <div class="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Pay</div>
+                        <div class="text-lg font-bold text-slate-900 dark:text-slate-100">$1.4k</div>
                     </div>
                 </div>
             </div>
-            <div class="bg-white rounded-xl shadow-soft border border-slate-100 overflow-hidden">
-                <div class="p-4 border-b border-slate-100 bg-slate-50/30">
-                    <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-slate-400">history</span>
+            <div
+                class="bg-white dark:bg-card-dark rounded-xl shadow-soft border border-slate-100 dark:border-slate-700 overflow-hidden">
+                <div class="p-4 border-b border-slate-100 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-800/50">
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-slate-400 dark:text-slate-500">history</span>
                         Recent History
                     </h3>
                 </div>
-                <div class="divide-y divide-slate-100">
-                    <div class="p-4 hover:bg-slate-50 transition-colors cursor-pointer group">
+                <div class="divide-y divide-slate-100 dark:divide-slate-700">
+                    <div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer group">
                         <div class="flex justify-between items-start mb-1">
-                            <div class="text-sm font-medium text-slate-900">Oct 16 - Oct 22</div>
+                            <div class="text-sm font-medium text-slate-900 dark:text-slate-100">Oct 16 - Oct 22</div>
                             <span
-                                class="material-icons text-slate-300 text-sm group-hover:text-primary transition-colors">chevron_right</span>
+                                class="material-icons text-slate-300 dark:text-slate-500 text-sm group-hover:text-primary transition-colors">chevron_right</span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div class="text-xs text-slate-500">40.00 Hours</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">40.00 Hours</div>
                             <span
-                                class="text-[10px] font-bold uppercase tracking-wider text-green-600 bg-green-50 px-2 py-1 rounded-full border border-green-100">Approved</span>
+                                class="text-[10px] font-bold uppercase tracking-wider text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full border border-green-100 dark:border-green-800">Approved</span>
                         </div>
                     </div>
-                    <div class="p-4 hover:bg-slate-50 transition-colors cursor-pointer group">
+                    <div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer group">
                         <div class="flex justify-between items-start mb-1">
-                            <div class="text-sm font-medium text-slate-900">Oct 09 - Oct 15</div>
+                            <div class="text-sm font-medium text-slate-900 dark:text-slate-100">Oct 09 - Oct 15</div>
                             <span
-                                class="material-icons text-slate-300 text-sm group-hover:text-primary transition-colors">chevron_right</span>
+                                class="material-icons text-slate-300 dark:text-slate-500 text-sm group-hover:text-primary transition-colors">chevron_right</span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div class="text-xs text-slate-500">38.50 Hours</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">38.50 Hours</div>
                             <span
-                                class="text-[10px] font-bold uppercase tracking-wider text-green-600 bg-green-50 px-2 py-1 rounded-full border border-green-100">Approved</span>
+                                class="text-[10px] font-bold uppercase tracking-wider text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full border border-green-100 dark:border-green-800">Approved</span>
                         </div>
                     </div>
-                    <div class="p-4 hover:bg-slate-50 transition-colors cursor-pointer group">
+                    <div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer group">
                         <div class="flex justify-between items-start mb-1">
-                            <div class="text-sm font-medium text-slate-900">Oct 02 - Oct 08</div>
+                            <div class="text-sm font-medium text-slate-900 dark:text-slate-100">Oct 02 - Oct 08</div>
                             <span
-                                class="material-icons text-slate-300 text-sm group-hover:text-primary transition-colors">chevron_right</span>
+                                class="material-icons text-slate-300 dark:text-slate-500 text-sm group-hover:text-primary transition-colors">chevron_right</span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <div class="text-xs text-slate-500">40.00 Hours</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">40.00 Hours</div>
                             <span
-                                class="text-[10px] font-bold uppercase tracking-wider text-green-600 bg-green-50 px-2 py-1 rounded-full border border-green-100">Paid</span>
+                                class="text-[10px] font-bold uppercase tracking-wider text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full border border-green-100 dark:border-green-800">Paid</span>
                         </div>
                     </div>
                 </div>
-                <div class="p-3 text-center border-t border-slate-100 bg-slate-50/30">
+                <div
+                    class="p-3 text-center border-t border-slate-100 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-800/50">
                     <button class="text-xs font-bold text-primary hover:text-primary-hover uppercase tracking-wide">View
                         All History</button>
                 </div>
