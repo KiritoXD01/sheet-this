@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property-read int $id
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read Company $company
  * @property-read Department|null $department
  * @property-read JobRole|null $jobRole
+ * @property-read Request[] $requests
  */
 #[UseFactory(EmployeeFactory::class)]
 final class Employee extends Model
@@ -70,6 +72,15 @@ final class Employee extends Model
             related: JobRole::class,
             foreignKey: 'job_role_id',
             ownerKey: 'id',
+        );
+    }
+
+    public function requests(): HasMany
+    {
+        return $this->hasMany(
+            related: Request::class,
+            foreignKey: 'employee_id',
+            localKey: 'id'
         );
     }
 }

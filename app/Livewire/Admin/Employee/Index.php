@@ -13,6 +13,7 @@ use App\Services\PosthogService;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -56,7 +57,7 @@ final class Index extends Component
         $this->resetPage();
     }
 
-    public function getEmployeesProperty()
+    public function getEmployeesProperty(): LengthAwarePaginator
     {
         return $this->buildEmployeeQuery()
             ->paginate(perPage: 8);
@@ -70,8 +71,10 @@ final class Index extends Component
             ->orderBy('name')
             ->get();
 
+        $employees = $this->getEmployeesProperty();
+
         return view('livewire.admin.employee.index', [
-            'employees' => $this->employees,
+            'employees' => $employees,
             'departments' => $departments,
         ]);
     }

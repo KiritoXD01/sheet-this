@@ -10,6 +10,7 @@ use App\Models\CompanyPolicy;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\JobRole;
+use App\Models\Request;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -56,11 +57,15 @@ final class DatabaseSeeder extends Seeder
         ]);
 
         foreach ($users as $user) {
-            Employee::factory()->create([
+            $employee = Employee::factory()->create([
                 'user_id' => $user->id,
                 'company_id' => $company->id,
                 'department_id' => $departments->random()->id,
                 'job_role_id' => $jobRoles->random()->id,
+            ]);
+
+            Request::factory(5)->create([
+                'employee_id' => $employee->id,
             ]);
         }
     }

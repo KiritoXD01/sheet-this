@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read JobRole[] $jobRoles
  * @property-read Employee[] $employees
  * @property-read Project[] $projects
+ * @property-read Request[] $requests
  */
 #[UseFactory(CompanyFactory::class)]
 final class Company extends Model
@@ -95,6 +97,18 @@ final class Company extends Model
             related: Project::class,
             foreignKey: 'company_id',
             localKey: 'id',
+        );
+    }
+
+    public function requests(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            related: Request::class,
+            through: Employee::class,
+            firstKey: 'company_id',
+            secondKey: 'employee_id',
+            localKey: 'id',
+            secondLocalKey: 'id',
         );
     }
 }
