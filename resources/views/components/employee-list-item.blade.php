@@ -16,7 +16,7 @@
         <div class="relative mb-4">
             <div
                 class="h-20 w-20 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl font-bold border-2 border-white dark:border-card-dark shadow-sm">
-                JC
+                {{ $employee->user->initials }}
             </div>
             <span
                 class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white dark:border-card-dark rounded-full"

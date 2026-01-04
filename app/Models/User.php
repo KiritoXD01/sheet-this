@@ -8,10 +8,12 @@ use App\Enums\UserRoleEnum;
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 /**
  * @property-read int $id
@@ -25,6 +27,7 @@ use Illuminate\Notifications\Notifiable;
  * @property-read Carbon $updated_at
  * @property-read Company|null $company
  * @property-read Employee|null $employee
+ * @property-read string $initials
  */
 #[UseFactory(UserFactory::class)]
 final class User extends Authenticatable
@@ -69,6 +72,29 @@ final class User extends Authenticatable
             related: Employee::class,
             foreignKey: 'user_id',
             localKey: 'id',
+        );
+    }
+
+    protected function initials(): Attribute
+    {
+        return Attribute::make(
+            get: function (): string {
+                if (empty($this->name)) {
+                    return '';
+                }
+
+                $words = array_values(array_filter(Str::of($this->name)->trim()->explode(' ')->all()));
+
+                if (count($words) >= 2) {
+                    return Str::upper(Str::substr($words[0], 0, 1).Str::substr($words[1], 0, 1));
+                }
+
+                if (count($words) === 1) {
+                    return Str::upper(Str::substr($words[0], 0, 2));
+                }
+
+                return '';
+            }
         );
     }
 

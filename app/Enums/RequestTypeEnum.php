@@ -13,4 +13,13 @@ enum RequestTypeEnum: string
     case VACATIONS = 'vacations';
     case SICK_LEAVE = 'sick_leave';
     case UNPAID_LEAVE = 'unpaid_leave';
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::VACATIONS => 'Vacation Request',
+            self::SICK_LEAVE => 'Sick Leave',
+            self::UNPAID_LEAVE => 'Unpaid Leave',
+        };
+    }
 }

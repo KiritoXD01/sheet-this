@@ -29,11 +29,6 @@
         </div>
         <div class="flex items-center gap-3">
             <button
-                class="px-4 py-2 rounded-lg bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm flex items-center gap-2">
-                <span class="material-icons text-sm">print</span>
-                Print Report
-            </button>
-            <button
                 class="px-4 py-2 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium text-sm shadow-glow transition-all active:scale-95 flex items-center gap-2">
                 <span class="material-icons text-sm">edit</span>
                 Edit Profile
@@ -49,7 +44,7 @@
             <div class="shrink-0 flex flex-col items-center">
                 <div
                     class="h-32 w-32 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-4xl font-bold border-4 border-white dark:border-card-dark shadow-md mb-4">
-                    JC
+                    {{ $employee->user->initials }}
                 </div>
                 <span
                     class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800">
@@ -115,13 +110,13 @@
                     <div
                         class="flex items-center bg-slate-50 dark:bg-slate-800 rounded-lg p-1 border border-slate-200 dark:border-slate-700">
                         <button
-                            class="p-1.5 rounded hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm text-slate-500 transition-all">
+                            class="p-1.5 rounded hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm text-slate-500 dark:text-slate-400 transition-all">
                             <span class="material-icons text-sm">chevron_left</span>
                         </button>
                         <span class="px-3 text-sm font-medium text-slate-700 dark:text-slate-300">Oct 23 - Oct 29,
                             2025</span>
                         <button
-                            class="p-1.5 rounded hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm text-slate-500 transition-all">
+                            class="p-1.5 rounded hover:bg-white dark:hover:bg-slate-700 hover:shadow-sm text-slate-500 dark:text-slate-400 transition-all">
                             <span class="material-icons text-sm">chevron_right</span>
                         </button>
                     </div>
@@ -219,7 +214,7 @@
                         </tbody>
                         <tfoot>
                             <tr
-                                class="bg-slate-50 dark:bg-slate-800/50 font-medium border-t border-slate-200 dark:border-slate-700">
+                                class="bg-slate-50 dark:bg-slate-800/50 font-medium border-t border-slate-100 dark:border-slate-800">
                                 <td class="px-6 py-4 text-slate-900 dark:text-white" colspan="4">Weekly Total</td>
                                 <td class="px-6 py-4 text-right text-slate-900 dark:text-white text-lg">32h 15m</td>
                                 <td></td>
@@ -252,7 +247,7 @@
                     <p class="text-slate-300 text-sm">Working Remotely</p>
                 </div>
                 <div class="mt-4 pt-4 border-t border-white/10 flex justify-between items-center text-sm relative z-10">
-                    <span class="text-slate-400">Since 08:55 AM</span>
+                    <span class="text-slate-300">Since 08:55 AM</span>
                     <span class="font-mono bg-white/10 px-2 py-1 rounded text-green-300">04:32:15</span>
                 </div>
             </div>
