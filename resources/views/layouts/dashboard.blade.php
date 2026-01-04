@@ -69,7 +69,8 @@
     </script>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-text-dark antialiased min-h-screen flex flex-col">
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-text-dark antialiased min-h-screen flex flex-col">
     <x-notifications />
     <livewire:dashboard.header />
     <main class="grow pt-28 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -79,14 +80,17 @@
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-sm text-slate-500 dark:text-slate-400">
-                © 2025 <a href="https://sheetthis.com" target="_blank" class="hover:text-primary dark:hover:text-primary transition-colors">Sheet This</a>. All rights
+                © {{ now()->format('Y') }} <a href="https://sheetthis.com" target="_blank"
+                    class="hover:text-primary dark:hover:text-primary transition-colors">Sheet This</a>. All rights
                 reserved.
             </div>
             <div class="flex gap-6 text-sm text-slate-500 dark:text-slate-400">
-                <a class="hover:text-primary dark:hover:text-primary transition-colors" href="https://sheetthis.com/privacy" target="_blank">
+                <a class="hover:text-primary dark:hover:text-primary transition-colors"
+                    href="https://sheetthis.com/privacy" target="_blank">
                     Privacy Policy
                 </a>
-                <a class="hover:text-primary dark:hover:text-primary transition-colors" href="https://sheetthis.com/terms" target="_blank">
+                <a class="hover:text-primary dark:hover:text-primary transition-colors"
+                    href="https://sheetthis.com/terms" target="_blank">
                     Terms of Service
                 </a>
             </div>

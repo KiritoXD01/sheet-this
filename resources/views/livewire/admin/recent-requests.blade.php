@@ -41,8 +41,8 @@
                     </div>
                     <p class="text-xs text-slate-500 dark:text-slate-400 pl-3.5">
                         {{ $request->start_date->format('M d') }} - {{ $request->end_date->format('M d') }}
-                        ({{ $request->start_date->diffInDays($request->end_date) + 1 }}
-                        {{ $request->start_date->diffInDays($request->end_date) == 0 ? 'Day' : 'Days' }})
+                        ({{ $request->days }}
+                        {{ $request->days == 1 ? 'Day' : 'Days' }})
                     </p>
                 </div>
                 <div class="flex gap-2">

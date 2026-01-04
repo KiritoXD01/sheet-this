@@ -26,11 +26,6 @@ final class Header extends Component
                         'route' => route('dashboard.timesheet'),
                         'active' => request()->routeIs('dashboard.timesheet'),
                     ],
-                    [
-                        'title' => 'Reports',
-                        'route' => route('dashboard.reports'),
-                        'active' => request()->routeIs('dashboard.reports'),
-                    ],
                 ],
                 UserRoleEnum::ADMIN => [
                     [

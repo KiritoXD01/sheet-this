@@ -11,7 +11,6 @@ use App\Http\Controllers\Admin\OnboardingController;
 use App\Http\Controllers\Admin\ShowEmployeeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\ReportsController;
 use App\Http\Controllers\Dashboard\TimesheetController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +23,6 @@ Route::middleware(['auth', 'employee'])
     ->group(function () {
         Route::get('/', DashboardController::class)->name('index');
         Route::get('/timesheet', TimesheetController::class)->name('timesheet');
-        Route::get('/reports', ReportsController::class)->name('reports');
     });
 
 Route::middleware(['auth', 'admin'])
