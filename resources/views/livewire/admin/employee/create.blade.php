@@ -19,8 +19,9 @@
                         </button>
                     </div>
                     <div class="flex-1 space-y-1.5">
-                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">Profile
-                            Picture</label>
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                            Profile Picture
+                        </label>
                         <p class="text-sm text-slate-500 dark:text-slate-400">Upload a professional headshot.
                             Recommended size: 400x400px.
                             Max file size: 5MB.</p>
@@ -87,7 +88,7 @@
     </div>
     <div
         class="bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-700 px-6 py-4 flex justify-end gap-3 rounded-b-xl">
-        <a href="{{ route('admin.employees') }}"
+        <a href="{{ route('admin.employees.index') }}"
             class="px-5 py-2.5 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-medium text-sm hover:bg-white dark:hover:bg-slate-700 transition-colors shadow-sm">
             Cancel
         </a>

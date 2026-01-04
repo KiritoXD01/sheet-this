@@ -12,176 +12,105 @@
                     <span class="material-icons text-slate-400 text-sm">search</span>
                 </span>
                 <input
+                    wire:model.live.debounce.300ms="search"
                     class="pl-9 pr-4 py-1.5 text-sm border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 dark:text-slate-100 focus:ring-primary focus:border-primary placeholder-slate-400 dark:placeholder-slate-500"
                     placeholder="Search employee..." type="text" />
+                <div wire:loading wire:target="search" class="absolute right-3 top-1/2 -translate-y-1/2">
+                    <span class="material-icons animate-spin text-primary text-xs">refresh</span>
+                </div>
             </div>
-            <button
-                class="p-1.5 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-card-dark">
-                <span class="material-icons text-sm">filter_list</span>
-            </button>
+            <select
+                wire:model.live="departmentFilter"
+                class="text-sm border border-slate-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 dark:text-slate-100 focus:ring-primary focus:border-primary py-1.5 pr-8 pl-3">
+                <option value="">All Departments</option>
+                @foreach ($departments as $department)
+                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                @endforeach
+            </select>
+            @if ($search || $departmentFilter)
+                <button
+                    wire:click="clearFilters"
+                    class="p-1.5 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-card-dark"
+                    title="Clear filters">
+                    <span class="material-icons text-sm">clear</span>
+                </button>
+            @endif
         </div>
     </div>
-    <div class="overflow-x-auto">
-        <table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-            <thead
-                class="bg-slate-50 dark:bg-slate-800 text-xs uppercase font-semibold text-slate-500 dark:text-slate-400">
-                <tr>
-                    <th class="px-6 py-4">Employee</th>
-                    <th class="px-6 py-4">Department</th>
-                    <th class="px-6 py-4">Time In</th>
-                    <th class="px-6 py-4">Location</th>
-                    <th class="px-6 py-4 text-right">Status</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
-                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600">
-                                JS
-                            </div>
-                            <div>
-                                <div class="font-medium text-slate-900 dark:text-slate-100">John Smith</div>
-                                <div class="text-[10px] text-slate-500">Software Engineer</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">Engineering</td>
-                    <td class="px-6 py-4 font-mono text-xs">08:58 AM</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-1.5">
-                            <span class="material-icons text-green-500 text-sm">verified</span>
-                            <span class="text-xs">Office HQ</span>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <span
-                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                            Active
-                        </span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="h-8 w-8 rounded-full bg-emerald-100 flex items-center justify-center text-xs font-bold text-emerald-600">
-                                ED
-                            </div>
-                            <div>
-                                <div class="font-medium text-slate-900 dark:text-slate-100">Emma Davis</div>
-                                <div class="text-[10px] text-slate-500">Product Manager</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">Product</td>
-                    <td class="px-6 py-4 font-mono text-xs">09:05 AM</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-1.5">
-                            <span class="material-icons text-green-500 text-sm">verified</span>
-                            <span class="text-xs">Remote (IP)</span>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <span
-                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                            Active
-                        </span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="h-8 w-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-600">
-                                MP
-                            </div>
-                            <div>
-                                <div class="font-medium text-slate-900 dark:text-slate-100">Mike Peterson</div>
-                                <div class="text-[10px] text-slate-500">Sales Rep</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">Sales</td>
-                    <td class="px-6 py-4 font-mono text-xs">--:--</td>
-                    <td class="px-6 py-4">
-                        <span class="text-xs text-slate-400">-</span>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <span
-                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
-                            Not In
-                        </span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center text-xs font-bold text-orange-600">
-                                SL
-                            </div>
-                            <div>
-                                <div class="font-medium text-slate-900 dark:text-slate-100">Sarah Lee</div>
-                                <div class="text-[10px] text-slate-500">Customer Support</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">Support</td>
-                    <td class="px-6 py-4 font-mono text-xs">09:45 AM</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-1.5">
-                            <span class="material-icons text-orange-400 text-sm">gpp_maybe</span>
-                            <span class="text-xs">Unverified</span>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <span
-                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
-                            Late
-                        </span>
-                    </td>
-                </tr>
-                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-xs font-bold text-purple-600">
-                                DK
-                            </div>
-                            <div>
-                                <div class="font-medium text-slate-900 dark:text-slate-100">David Kim</div>
-                                <div class="text-[10px] text-slate-500">Engineering</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4">Engineering</td>
-                    <td class="px-6 py-4 font-mono text-xs">08:30 AM</td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center gap-1.5">
-                            <span class="material-icons text-green-500 text-sm">verified</span>
-                            <span class="text-xs">Office HQ</span>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <span
-                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
-                            Break
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="overflow-x-auto" wire:loading.class="opacity-50" wire:target="search,departmentFilter">
+        @if ($employees->count() > 0)
+            <table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
+                <thead
+                    class="bg-slate-50 dark:bg-slate-800 text-xs uppercase font-semibold text-slate-500 dark:text-slate-400">
+                    <tr>
+                        <th class="px-6 py-4">Employee</th>
+                        <th class="px-6 py-4">Department</th>
+                        <th class="px-6 py-4">Time In</th>
+                        <th class="px-6 py-4">Location</th>
+                        <th class="px-6 py-4 text-right">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+                    @foreach ($employees as $employee)
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" wire:key="employee-{{ $employee->id }}">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="h-8 w-8 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-xs font-bold text-indigo-600 dark:text-indigo-300">
+                                        {{ $employee->user->initials }}
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-slate-900 dark:text-slate-100">{{ $employee->user->name }}</div>
+                                        <div class="text-[10px] text-slate-500 dark:text-slate-400">{{ $employee->jobRole?->name ?? 'No Role' }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">{{ $employee->department?->name ?? '-' }}</td>
+                            <td class="px-6 py-4 font-mono text-xs">--:--</td>
+                            <td class="px-6 py-4">
+                                <span class="text-xs text-slate-400 dark:text-slate-500">-</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+                                    Not In
+                                </span>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <div class="p-12 text-center">
+                <span class="material-icons text-slate-300 dark:text-slate-600 text-6xl">person_search</span>
+                <p class="text-slate-500 dark:text-slate-400 mt-4 text-base">
+                    @if ($search || $departmentFilter)
+                        No employees found matching your filters.
+                    @else
+                        No employees yet.
+                    @endif
+                </p>
+                @if ($search || $departmentFilter)
+                    <button
+                        wire:click="clearFilters"
+                        class="mt-4 px-4 py-2 text-sm text-primary hover:bg-primary/10 rounded-lg transition-colors">
+                        Clear filters
+                    </button>
+                @endif
+            </div>
+        @endif
     </div>
-    <div
-        class="grow flex items-center justify-between p-4 border-t border-slate-100 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-800/30">
-        <p class="text-xs text-slate-400 dark:text-slate-500">Showing 5 of 124 employees</p>
-        <div class="flex gap-2">
-            <button
-                class="px-3 py-1 border border-slate-200 dark:border-slate-600 rounded text-xs dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800 transition-colors">Previous</button>
-            <button
-                class="px-3 py-1 border border-slate-200 dark:border-slate-600 rounded text-xs dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800 transition-colors">Next</button>
+    @if ($employees->hasPages())
+        <div
+            class="grow flex items-center justify-between p-4 border-t border-slate-100 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-800/30">
+            <p class="text-xs text-slate-400 dark:text-slate-500">
+                Showing <span class="font-medium text-slate-900 dark:text-slate-100">{{ $employees->firstItem() }}</span> to
+                <span class="font-medium text-slate-900 dark:text-slate-100">{{ $employees->lastItem() }}</span>
+                of <span class="font-medium text-slate-900 dark:text-slate-100">{{ $employees->total() }}</span> employees
+            </p>
+            <div>
+                {{ $employees->links() }}
+            </div>
         </div>
-    </div>
+    @endif
 </div>

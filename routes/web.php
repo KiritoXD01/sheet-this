@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\CreateEmployeeController;
+use App\Http\Controllers\Admin\EditEmployeeController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\OnboardingController;
@@ -40,10 +41,12 @@ Route::middleware(['auth', 'admin', 'admin.company'])
     ->group(function () {
         Route::get('/', IndexController::class)->name('index');
         Route::prefix('employees')
+            ->name('employees.')
             ->group(function () {
-                Route::get('/', EmployeeController::class)->name('employees');
-                Route::get('/create', CreateEmployeeController::class)->name('employees.create');
-                Route::get('/{employee}', ShowEmployeeController::class)->name('employees.show');
+                Route::get('/', EmployeeController::class)->name('index');
+                Route::get('/create', CreateEmployeeController::class)->name('create');
+                Route::get('/{employee}', ShowEmployeeController::class)->name('show');
+                Route::get('/{employee}/edit', EditEmployeeController::class)->name('edit');
             });
         Route::get('/company', CompanyController::class)->name('company');
     });

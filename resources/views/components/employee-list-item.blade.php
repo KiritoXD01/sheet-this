@@ -43,9 +43,9 @@
             <span class="material-icons text-sm">visibility</span>
             Profile
         </a>
-        <button
+        <a href="{{ route('admin.employees.edit', $employee->id) }}"
             class="py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-400 hover:text-primary hover:border-primary transition-colors">
             <span class="material-icons text-sm">edit</span>
-        </button>
+        </a>
     </div>
 </div>

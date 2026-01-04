@@ -4,7 +4,7 @@
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
             <a class="inline-flex items-center text-sm text-slate-500 dark:text-slate-400 hover:text-primary transition-colors mb-4 group"
-                href="{{ route('admin.employees') }}">
+                href="{{ route('admin.employees.index') }}">
                 <span class="material-icons text-lg mr-1 group-hover:-translate-x-1 transition-transform">arrow_back</span>
                 Back to Employees List
             </a>

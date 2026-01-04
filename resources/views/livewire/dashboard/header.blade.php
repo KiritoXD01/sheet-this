@@ -2,7 +2,7 @@
     class="w-full fixed top-0 z-50 bg-white/90 dark:bg-card-dark/90 backdrop-blur-sm border-b border-slate-100 dark:border-slate-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 cursor-pointer" wire:click="home">
                 <div class="bg-primary rounded-lg p-1.5 flex items-center justify-center">
                     <span class="material-icons text-white text-xl">schedule</span>
                 </div>
