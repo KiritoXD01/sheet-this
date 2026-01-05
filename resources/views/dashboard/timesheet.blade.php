@@ -337,16 +337,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-700 grid grid-cols-2 gap-4">
-                    <div class="bg-slate-50 dark:bg-slate-800 p-3 rounded-lg text-center">
-                        <div class="text-xs text-slate-500 dark:text-slate-400 mb-1">Utilization</div>
-                        <div class="text-lg font-bold text-slate-900 dark:text-slate-100">86%</div>
-                    </div>
-                    <div class="bg-slate-50 dark:bg-slate-800 p-3 rounded-lg text-center">
-                        <div class="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Pay</div>
-                        <div class="text-lg font-bold text-slate-900 dark:text-slate-100">$1.4k</div>
-                    </div>
-                </div>
             </div>
             <div
                 class="bg-white dark:bg-card-dark rounded-xl shadow-soft border border-slate-100 dark:border-slate-700 overflow-hidden">
@@ -393,11 +383,6 @@
                                 class="text-[10px] font-bold uppercase tracking-wider text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full border border-green-100 dark:border-green-800">Paid</span>
                         </div>
                     </div>
-                </div>
-                <div
-                    class="p-3 text-center border-t border-slate-100 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-800/50">
-                    <button class="text-xs font-bold text-primary hover:text-primary-hover uppercase tracking-wide">View
-                        All History</button>
                 </div>
             </div>
         </div>

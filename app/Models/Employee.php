@@ -83,4 +83,13 @@ final class Employee extends Model
             localKey: 'id'
         );
     }
+
+    public function timesheets(): HasMany
+    {
+        return $this->hasMany(
+            related: Timesheet::class,
+            foreignKey: 'employee_id',
+            localKey: 'id'
+        );
+    }
 }

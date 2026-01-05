@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property-read int $id
@@ -49,6 +50,15 @@ final class Project extends Model
             related: Company::class,
             foreignKey: 'company_id',
             ownerKey: 'id',
+        );
+    }
+
+    public function timesheets(): HasMany
+    {
+        return $this->hasMany(
+            related: Timesheet::class,
+            foreignKey: 'project_id',
+            localKey: 'id',
         );
     }
 }

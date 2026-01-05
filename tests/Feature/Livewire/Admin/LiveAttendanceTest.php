@@ -12,8 +12,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Livewire\Livewire;
 
-use function Pest\Laravel\actingAs;
-
 beforeEach(function () {
     $this->user = User::factory()->create(['role' => UserRoleEnum::ADMIN]);
     $this->company = Company::factory()->create(['owner_id' => $this->user->id]);

@@ -10,7 +10,10 @@ use App\Models\CompanyPolicy;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\JobRole;
+use App\Models\Project;
 use App\Models\Request;
+use App\Models\Timesheet;
+use App\Models\TimesheetItem;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -34,6 +37,10 @@ final class DatabaseSeeder extends Seeder
         // Create a company
         $company = Company::factory()->create([
             'owner_id' => $user->id,
+        ]);
+
+        $projects = Project::factory(5)->create([
+            'company_id' => $company->id,
         ]);
 
         // Create Company Policy
@@ -66,6 +73,15 @@ final class DatabaseSeeder extends Seeder
 
             Request::factory(5)->create([
                 'employee_id' => $employee->id,
+            ]);
+
+            $timesheets = Timesheet::factory(5)->create([
+                'employee_id' => $employee->id,
+            ]);
+
+            TimesheetItem::factory(5)->create([
+                'timesheet_id' => $timesheets->random()->id,
+                'project_id' => $projects->random()->id,
             ]);
         }
     }
