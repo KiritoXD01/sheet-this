@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login')->name('home');
 Route::get('/login', LoginController::class)->middleware('guest')->name('login');
-Route::get('/email/verify/{id}/{hash}', EmailVerificationController::class)->name('verification.verify');
+Route::get('/email/verify/{user}/{hash}', EmailVerificationController::class)->name('verification.verify');
 
-Route::middleware(['auth', 'employee', 'signed'])
+Route::middleware(['auth', 'employee'])
     ->prefix('dashboard')
     ->name('dashboard.')
     ->group(function () {
@@ -27,7 +27,7 @@ Route::middleware(['auth', 'employee', 'signed'])
         Route::get('/timesheet', TimesheetController::class)->name('timesheet');
     });
 
-Route::middleware(['auth', 'admin', 'signed'])
+Route::middleware(['auth', 'admin', 'verified'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -35,7 +35,7 @@ Route::middleware(['auth', 'admin', 'signed'])
     });
 
 // Protected admin routes (require company via admin.company middleware)
-Route::middleware(['auth', 'admin', 'admin.company', 'signed'])
+Route::middleware(['auth', 'admin', 'admin.company', 'verified'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {

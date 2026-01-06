@@ -4,15 +4,26 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 
 final class EmailVerificationController extends Controller
 {
-    public function __invoke(EmailVerificationRequest $request): RedirectResponse
+    public function __invoke(User $user): RedirectResponse
     {
-        $request->fulfill();
+        if (! hash_equals(
+            sha1($user->getEmailForVerification()),
+            (string) request()->route('hash')
+        )) {
+            return redirect('/login')->with('verification_error', 'Invalid verification link.');
+        }
 
-        return redirect('/login')->with('verification_sucess', 'Email verified successfully.');
+        if ($user->hasVerifiedEmail()) {
+            return redirect('/login')->with('verification_info', 'Email already verified.');
+        }
+
+        $user->markEmailAsVerified();
+
+        return redirect('/login')->with('verification_success', 'Email verified successfully.');
     }
 }

@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\UserRoleEnum;
-use App\Notifications\VerifyEmail;
 use Carbon\Carbon;
-use Database\Factories\UserFactory;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Attributes\UseFactory;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use App\Enums\UserRoleEnum;
 use Illuminate\Support\Str;
+use App\Notifications\VerifyEmail;
+use Database\Factories\UserFactory;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @property-read int $id
@@ -122,11 +123,11 @@ final class User extends Authenticatable implements MustVerifyEmail
 
     protected function verificationUrl(): string
     {
-        return \Illuminate\Support\Facades\URL::temporarySignedRoute(
+        return URL::temporarySignedRoute(
             'verification.verify',
             now()->addMinutes(60),
             [
-                'id' => $this->getKey(),
+                'user' => $this->getKey(),
                 'hash' => sha1($this->getEmailForVerification()),
             ]
         );
