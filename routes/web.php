@@ -12,12 +12,14 @@ use App\Http\Controllers\Admin\ShowEmployeeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\TimesheetController;
+use App\Http\Controllers\EmailVerificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login')->name('home');
 Route::get('/login', LoginController::class)->middleware('guest')->name('login');
+Route::get('/email/verify/{id}/{hash}', EmailVerificationController::class)->name('verification.verify');
 
-Route::middleware(['auth', 'employee'])
+Route::middleware(['auth', 'employee', 'signed'])
     ->prefix('dashboard')
     ->name('dashboard.')
     ->group(function () {
@@ -25,7 +27,7 @@ Route::middleware(['auth', 'employee'])
         Route::get('/timesheet', TimesheetController::class)->name('timesheet');
     });
 
-Route::middleware(['auth', 'admin'])
+Route::middleware(['auth', 'admin', 'signed'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -33,7 +35,7 @@ Route::middleware(['auth', 'admin'])
     });
 
 // Protected admin routes (require company via admin.company middleware)
-Route::middleware(['auth', 'admin', 'admin.company'])
+Route::middleware(['auth', 'admin', 'admin.company', 'signed'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {

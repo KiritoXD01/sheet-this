@@ -13,6 +13,6 @@ final class RegisterUserDTO extends Data
         #[MapInputName('full_name')]
         public string $fullName,
         public string $email,
-        public string $password
+        public string $password,
     ) {}
 }

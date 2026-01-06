@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
+use App\Enums\UserRoleEnum;
+use App\Mail\EmailVerification;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\postJson;
@@ -21,6 +25,8 @@ it('registers new user successfully', function () {
             'success' => true,
             'message' => 'User created successfully',
         ]);
+
+    Mail::assertSent(EmailVerification::class);
 
     assertDatabaseHas('users', [
         'name' => 'John Doe',
@@ -115,4 +121,32 @@ it('requires terms_agreed to be boolean', function () {
         'terms_agreed' => 'yes',
     ])->assertUnprocessable()
         ->assertJsonValidationErrors('terms_agreed');
+});
+
+it('defaults role to admin', function () {
+    postJson(route('api.register'), [
+        'full_name' => 'Admin User',
+        'email' => 'admin@example.com',
+        'password' => 'Password123!',
+        'password_confirmation' => 'Password123!',
+        'terms_agreed' => true,
+    ])->assertSuccessful();
+
+    $user = User::query()->where('email', 'admin@example.com')->first();
+    expect($user->role)->toBe(UserRoleEnum::ADMIN);
+});
+
+it('sends verification email for admin users', function () {
+    Notification::fake();
+
+    postJson(route('api.register'), [
+        'full_name' => 'Admin User',
+        'email' => 'verify-admin@example.com',
+        'password' => 'Password123!',
+        'password_confirmation' => 'Password123!',
+        'terms_agreed' => true,
+    ])->assertSuccessful();
+
+    $user = User::query()->where('email', 'verify-admin@example.com')->first();
+    Notification::assertSentTo($user, App\Notifications\VerifyEmail::class);
 });

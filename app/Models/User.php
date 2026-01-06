@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\UserRoleEnum;
+use App\Notifications\VerifyEmail;
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,7 +32,7 @@ use Illuminate\Support\Str;
  * @property-read string $initials
  */
 #[UseFactory(UserFactory::class)]
-final class User extends Authenticatable
+final class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -75,6 +77,11 @@ final class User extends Authenticatable
         );
     }
 
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new VerifyEmail($this->verificationUrl()));
+    }
+
     protected function initials(): Attribute
     {
         return Attribute::make(
@@ -111,5 +118,17 @@ final class User extends Authenticatable
             'role' => UserRoleEnum::class,
             'terms_agreed_at' => 'datetime',
         ];
+    }
+
+    protected function verificationUrl(): string
+    {
+        return \Illuminate\Support\Facades\URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(60),
+            [
+                'id' => $this->getKey(),
+                'hash' => sha1($this->getEmailForVerification()),
+            ]
+        );
     }
 }

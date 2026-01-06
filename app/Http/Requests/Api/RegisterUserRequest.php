@@ -6,6 +6,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 final class RegisterUserRequest extends FormRequest
@@ -44,7 +45,9 @@ final class RegisterUserRequest extends FormRequest
     {
         return [
             'full_name' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'email', 'max:100', 'unique:users,email'],
+            'email' => ['required', Rule::email()
+                ->when(app()->isProduction(), fn ($rule) => $rule->rfcCompliant()),
+                Rule::unique('users', 'email')],
             'terms_agreed' => ['required', 'boolean'],
             'password' => ['required', 'confirmed', Password::defaults()],
         ];

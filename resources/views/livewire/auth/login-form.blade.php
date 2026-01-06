@@ -1,5 +1,11 @@
 <form wire:submit="submit" class="space-y-6" autocomplete="off">
     <x-errors only="login" />
+    <x-errors only="email_verification" />
+    @if (session()->has('verification_success'))
+        <div class="text-green-600">
+            {{ session('verification_success') }}
+        </div>
+    @endif
     <div>
         <x-input label="Email" placeholder="your email" wire:model="email" type="email" />
     </div>
