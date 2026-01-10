@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
-use function Pest\Laravel\get;
 use Illuminate\Support\Facades\URL;
+
+use function Pest\Laravel\get;
 
 it('verifies email successfully with valid hash', function () {
     $user = User::factory()->create(['email_verified_at' => null]);

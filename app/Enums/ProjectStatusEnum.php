@@ -14,4 +14,14 @@ enum ProjectStatusEnum: string
     case ON_HOLD = 'on_hold';
     case PLANNING = 'planning';
     case COMPLETED = 'completed';
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::ACTIVE => 'Active',
+            self::ON_HOLD => 'On Hold',
+            self::PLANNING => 'Planning',
+            self::COMPLETED => 'Completed',
+        };
+    }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('timesheet_id')->references('id')->on('timesheets');
             $table->foreignId('project_id')->references('id')->on('projects');
             $table->date('item_date');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->time('start_time');
             $table->time('end_time');
             $table->boolean('is_billable')->default(true);

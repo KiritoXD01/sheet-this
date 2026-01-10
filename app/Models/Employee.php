@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Department|null $department
  * @property-read JobRole|null $jobRole
  * @property-read Request[] $requests
+ * @property-read Timesheet[] $timesheets
  */
 #[UseFactory(EmployeeFactory::class)]
 final class Employee extends Model

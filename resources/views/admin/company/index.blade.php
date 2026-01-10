@@ -12,6 +12,7 @@
         <livewire:admin.company.general-information />
         <livewire:admin.company.department-list />
         <livewire:admin.company.job-role-list />
+        <livewire:admin.company.project-list />
         <livewire:admin.company.policy />
     </div>
 @endsection
