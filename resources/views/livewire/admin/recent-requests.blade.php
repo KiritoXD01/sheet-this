@@ -47,7 +47,7 @@
                 </div>
                 <div class="flex gap-2">
                     <button
-                        class="flex-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 py-1.5 rounded-lg text-xs font-medium transition-colors"
+                        class="flex-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer"
                         wire:click="reject({{ $request->id }})">
                         Deny
                     </button>

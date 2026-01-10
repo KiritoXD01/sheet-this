@@ -20,6 +20,11 @@
             </li>
         </ol>
     </nav>
+    @if (session('employee-updated'))
+        <div class="w-full mb-5">
+            <x-alert type="success" icon="check-circle" :title="session('employee-updated')" />
+        </div>
+    @endif
     <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
         <div>
             <h1 class="text-3xl font-bold text-slate-900 dark:text-white">{{ $employee->user->name }}</h1>
