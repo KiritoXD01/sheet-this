@@ -3,15 +3,15 @@
 declare(strict_types=1);
 
 use App\Enums\UserRoleEnum;
-use App\Mail\EmailVerification;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\postJson;
 
 it('registers new user successfully', function () {
+    Notification::fake();
+
     $response = postJson(route('api.register'), [
         'full_name' => 'John Doe',
         'email' => 'john@example.com',
@@ -26,7 +26,8 @@ it('registers new user successfully', function () {
             'message' => 'User created successfully',
         ]);
 
-    Mail::assertSent(EmailVerification::class);
+    $user = User::query()->where('email', 'john@example.com')->first();
+    Notification::assertSentTo($user, App\Notifications\VerifyEmail::class);
 
     assertDatabaseHas('users', [
         'name' => 'John Doe',

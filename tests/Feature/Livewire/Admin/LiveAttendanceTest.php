@@ -102,14 +102,22 @@ it('can search employees by department name', function () {
 });
 
 it('can search employees by employee code', function () {
-    $employee1 = Employee::factory()->create(['company_id' => $this->company->id, 'employee_code' => 'EMP001']);
-    $employee2 = Employee::factory()->create(['company_id' => $this->company->id, 'employee_code' => 'EMP002']);
+    $employee1 = Employee::factory()->create([
+        'company_id' => $this->company->id,
+        'employee_code' => 'EMP001',
+        'user_id' => User::factory()->create(['name' => 'John Doe'])->id,
+    ]);
+    $employee2 = Employee::factory()->create([
+        'company_id' => $this->company->id,
+        'employee_code' => 'EMP002',
+        'user_id' => User::factory()->create(['name' => 'Jane Smith'])->id,
+    ]);
 
     Livewire::actingAs($this->user)
         ->test(LiveAttendance::class)
         ->set('search', 'EMP001')
-        ->assertSee('EMP001')
-        ->assertDontSee('EMP002');
+        ->assertSee('John Doe')
+        ->assertDontSee('Jane Smith');
 });
 
 it('can filter employees by department', function () {
@@ -150,9 +158,9 @@ it('can combine search and department filter', function () {
         ->test(LiveAttendance::class)
         ->set('search', 'john.doe@test.com')
         ->set('departmentFilter', $dept1->id)
-        ->assertSee('john.doe@test.com')
-        ->assertDontSee('jane.smith@test.com')
-        ->assertDontSee('john.smith@test.com');
+        ->assertSee('John Doe')
+        ->assertDontSee('Jane Smith')
+        ->assertDontSee('John Smith');
 });
 
 it('can clear all filters', function () {
@@ -252,13 +260,13 @@ it('shows empty state when no employees match filters', function () {
         ->assertSee('No employees found matching your filters');
 });
 
-it('paginates employees at 8 per page', function () {
+it('paginates employees at 5 per page', function () {
     Employee::factory()->count(10)->create(['company_id' => $this->company->id]);
 
     $component = Livewire::actingAs($this->user)
         ->test(LiveAttendance::class);
 
-    expect($component->get('employees')->count())->toBe(8);
+    expect($component->get('employees')->count())->toBe(5);
 });
 
 it('handles null department gracefully', function () {

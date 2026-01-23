@@ -23,7 +23,7 @@ it('renders employee index page successfully', function () {
     $employee = Employee::factory()->create(['company_id' => $this->company->id]);
 
     actingAs($this->user)
-        ->get(route('admin.employees'))
+        ->get(route('admin.employees.index'))
         ->assertSuccessful()
         ->assertSee('Employees')
         ->assertSee($employee->user->name);

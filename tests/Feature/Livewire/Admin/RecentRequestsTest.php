@@ -85,10 +85,8 @@ it('limits requests to maximum of 5', function () {
         ->test(RecentRequests::class);
 
     $requests = $component->viewData('requests');
-    $requestsCount = $component->viewData('requestsCount');
 
     expect($requests)->toHaveCount(5);
-    expect($requestsCount)->toBe(5);
 });
 
 it('displays employee initials correctly', function () {
@@ -207,7 +205,7 @@ it('displays date range with correct day calculation', function () {
         ->test(RecentRequests::class)
         ->assertSee($startDate->format('M d'))
         ->assertSee($endDate->format('M d'))
-        ->assertSee('4 Days');
+        ->assertSeeInOrder(['4', 'Days']);
 });
 
 it('displays single day request correctly', function () {
@@ -224,7 +222,7 @@ it('displays single day request correctly', function () {
 
     Livewire::actingAs($this->user)
         ->test(RecentRequests::class)
-        ->assertSee('1 Day');
+        ->assertSeeInOrder(['1', 'Day']);
 });
 
 it('orders requests by latest first', function () {

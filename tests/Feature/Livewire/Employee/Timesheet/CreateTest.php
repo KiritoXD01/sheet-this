@@ -125,17 +125,19 @@ it('validates end time is after start time', function () {
         ->assertHasErrors(['items.0.end_time']);
 });
 
-it('resets form after saving', function () {
+it('preserves form data after saving', function () {
     $component = Livewire::actingAs($this->user)
         ->test(Create::class)
         ->set('items.0.project_id', $this->project->id)
+        ->set('items.0.item_date', now()->format('Y-m-d'))
         ->set('items.0.start_time', '09:00')
         ->set('items.0.end_time', '17:00')
         ->set('notes', 'Some notes')
         ->call('saveDraft');
 
-    expect($component->get('notes'))->toBeNull();
+    expect($component->get('notes'))->toBe('Some notes');
     expect($component->get('items'))->toHaveCount(1);
+    expect($component->get('currentTimesheet'))->not->toBeNull();
 });
 
 it('can toggle is_billable for each item', function () {
@@ -148,4 +150,87 @@ it('can toggle is_billable for each item', function () {
     $component->set('items.0.is_billable', false);
 
     expect($component->get('items.0.is_billable'))->toBeFalse();
+});
+
+it('initializes with current week dates', function () {
+    $component = Livewire::actingAs($this->user)
+        ->test(Create::class);
+
+    $weekStart = now()->startOfWeek(Carbon\Carbon::MONDAY);
+    $weekEnd = $weekStart->copy()->endOfWeek(Carbon\Carbon::SUNDAY);
+
+    expect($component->get('weekStart')->format('Y-m-d'))->toBe($weekStart->format('Y-m-d'));
+    expect($component->get('weekEnd')->format('Y-m-d'))->toBe($weekEnd->format('Y-m-d'));
+});
+
+it('can navigate to previous week', function () {
+    $component = Livewire::actingAs($this->user)
+        ->test(Create::class);
+
+    $originalWeekStart = $component->get('weekStart')->copy();
+
+    $component->call('previousWeek');
+
+    expect($component->get('weekStart')->format('Y-m-d'))
+        ->toBe($originalWeekStart->subWeek()->format('Y-m-d'));
+});
+
+it('can navigate to next week', function () {
+    $component = Livewire::actingAs($this->user)
+        ->test(Create::class);
+
+    $originalWeekStart = $component->get('weekStart')->copy();
+
+    $component->call('nextWeek');
+
+    expect($component->get('weekStart')->format('Y-m-d'))
+        ->toBe($originalWeekStart->addWeek()->format('Y-m-d'));
+});
+
+it('calculates billable hours correctly', function () {
+    Livewire::actingAs($this->user)
+        ->test(Create::class)
+        ->set('items.0.start_time', '09:00')
+        ->set('items.0.end_time', '17:00')
+        ->set('items.0.is_billable', true)
+        ->call('addItem')
+        ->set('items.1.start_time', '09:00')
+        ->set('items.1.end_time', '13:00')
+        ->set('items.1.is_billable', false)
+        ->assertSee('8.0h')
+        ->assertSee('4.0h');
+});
+
+it('clears all items when clearAll is called', function () {
+    $component = Livewire::actingAs($this->user)
+        ->test(Create::class)
+        ->set('items.0.description', 'Test description')
+        ->set('notes', 'Test notes')
+        ->call('addItem')
+        ->call('clearAll');
+
+    expect($component->get('items'))->toHaveCount(1);
+    expect($component->get('notes'))->toBeNull();
+    expect($component->get('items.0.description'))->toBeNull();
+});
+
+it('loads existing timesheet when navigating to a week with saved data', function () {
+    // First, create a timesheet for the current week
+    Livewire::actingAs($this->user)
+        ->test(Create::class)
+        ->set('items.0.project_id', $this->project->id)
+        ->set('items.0.item_date', now()->format('Y-m-d'))
+        ->set('items.0.start_time', '09:00')
+        ->set('items.0.end_time', '17:00')
+        ->set('notes', 'Existing timesheet notes')
+        ->call('saveDraft');
+
+    // Navigate away and back
+    $component = Livewire::actingAs($this->user)
+        ->test(Create::class)
+        ->call('previousWeek')
+        ->call('nextWeek');
+
+    expect($component->get('notes'))->toBe('Existing timesheet notes');
+    expect($component->get('currentTimesheet'))->not->toBeNull();
 });

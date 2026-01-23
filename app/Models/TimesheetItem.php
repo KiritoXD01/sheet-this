@@ -44,6 +44,7 @@ final class TimesheetItem extends Model
         'item_date' => 'date:Y-m-d',
         'start_time' => 'datetime:h:i:s',
         'end_time' => 'datetime:h:i:s',
+        'is_billable' => 'boolean',
     ];
 
     public function timesheet(): BelongsTo
