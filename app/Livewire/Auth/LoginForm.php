@@ -6,28 +6,30 @@ namespace App\Livewire\Auth;
 
 use App\Enums\UserRoleEnum;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 final class LoginForm extends Component
 {
-    #[Validate(['required', 'email'])]
-    public string $email;
+    #[Validate(['required', 'string', 'email'])]
+    public string|array $email = '';
 
-    #[Validate(['required'])]
-    public string $password;
+    #[Validate(['required', 'string'])]
+    public string|array $password = '';
 
     public bool $remember = false;
 
     public function submit(): void
     {
-        $this->validate();
+        /** @var array{email: string, password: string} $validated */
+        $validated = $this->validate();
 
         $success = Auth::attempt(
             credentials: [
-                'email' => $this->email,
-                'password' => $this->password,
+                'email' => $validated['email'],
+                'password' => $validated['password'],
             ],
             remember: $this->remember
         );
@@ -49,7 +51,7 @@ final class LoginForm extends Component
         redirect()->intended(route($route));
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.auth.login-form');
     }

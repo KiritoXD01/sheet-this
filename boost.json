@@ -1,7 +1,16 @@
 {
     "agents": [
         "claude_code",
-        "gemini"
+        "codex",
+        "gemini",
+        "opencode"
+    ],
+    "editors": [
+        "claude_code",
+        "codex",
+        "gemini",
+        "opencode",
+        "vscode"
     ],
     "guidelines": []
 }
