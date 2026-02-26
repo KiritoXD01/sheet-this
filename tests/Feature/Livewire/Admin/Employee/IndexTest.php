@@ -42,12 +42,25 @@ it('only shows employees from the authenticated users company', function () {
 });
 
 it('can search employees by user name', function () {
+    $department = Department::factory()->create([
+        'company_id' => $this->company->id,
+        'name' => 'Engineering',
+    ]);
+    $jobRole = JobRole::factory()->create([
+        'company_id' => $this->company->id,
+        'name' => 'Developer',
+    ]);
+
     $employee1 = Employee::factory()->create([
         'company_id' => $this->company->id,
+        'department_id' => $department->id,
+        'job_role_id' => $jobRole->id,
         'user_id' => User::factory()->create(['name' => 'John Doe'])->id,
     ]);
     $employee2 = Employee::factory()->create([
         'company_id' => $this->company->id,
+        'department_id' => $department->id,
+        'job_role_id' => $jobRole->id,
         'user_id' => User::factory()->create(['name' => 'Jane Smith'])->id,
     ]);
 

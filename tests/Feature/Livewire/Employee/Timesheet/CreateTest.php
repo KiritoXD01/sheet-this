@@ -70,6 +70,24 @@ it('saves timesheet as draft successfully', function () {
     $this->assertDatabaseHas('timesheet_items', [
         'project_id' => $this->project->id,
         'is_billable' => true,
+        'description' => null,
+    ]);
+});
+
+it('stores empty description as null when saving draft', function () {
+    Livewire::actingAs($this->user)
+        ->test(Create::class)
+        ->set('items.0.project_id', $this->project->id)
+        ->set('items.0.item_date', now()->format('Y-m-d'))
+        ->set('items.0.description', '   ')
+        ->set('items.0.start_time', '09:00')
+        ->set('items.0.end_time', '17:00')
+        ->call('saveDraft')
+        ->assertHasNoErrors();
+
+    $this->assertDatabaseHas('timesheet_items', [
+        'project_id' => $this->project->id,
+        'description' => null,
     ]);
 });
 

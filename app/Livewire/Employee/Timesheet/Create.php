@@ -232,11 +232,13 @@ final class Create extends Component
         }
 
         foreach ($this->items as $item) {
+            $description = isset($item['description']) ? mb_trim((string) $item['description']) : '';
+
             TimesheetItem::query()->create([
                 'timesheet_id' => $timesheet->id,
                 'project_id' => $item['project_id'],
                 'item_date' => $item['item_date'],
-                'description' => $item['description'],
+                'description' => $description === '' ? null : $description,
                 'start_time' => $item['start_time'],
                 'end_time' => $item['end_time'],
                 'is_billable' => $item['is_billable'],
