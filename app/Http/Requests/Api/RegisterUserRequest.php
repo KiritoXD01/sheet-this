@@ -25,11 +25,11 @@ final class RegisterUserRequest extends FormRequest
         $referer = $this->header('Referer');
 
         // Check if Origin or Referer header contains sheetthis.com domain
-        if ($origin && str_ends_with(parse_url($origin, PHP_URL_HOST) ?? '', 'sheetthis.com')) {
+        if ($this->isValidWebsite($origin)) {
             return true;
         }
 
-        if ($referer && str_ends_with(parse_url($referer, PHP_URL_HOST) ?? '', 'sheetthis.com')) {
+        if ($this->isValidWebsite($referer)) {
             return true;
         }
 
@@ -51,5 +51,10 @@ final class RegisterUserRequest extends FormRequest
             'terms_agreed' => ['required', 'boolean'],
             'password' => ['required', 'confirmed', Password::defaults()],
         ];
+    }
+
+    private function isValidWebsite(?string $url): bool
+    {
+        return $url && str_ends_with(parse_url($url, PHP_URL_HOST) ?? '', 'sheetthis.com');
     }
 }
