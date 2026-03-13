@@ -6,6 +6,8 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +27,7 @@ use Illuminate\Support\Str;
  * @property-read string $initials
  */
 #[UseFactory(UserFactory::class)]
-final class User extends Authenticatable
+final class User extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable;
 
@@ -49,6 +51,11 @@ final class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
 
     protected function initials(): Attribute
     {
