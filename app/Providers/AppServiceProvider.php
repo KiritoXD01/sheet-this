@@ -6,7 +6,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
-use PostHog\PostHog;
 
 final class AppServiceProvider extends ServiceProvider
 {
@@ -30,14 +29,5 @@ final class AppServiceProvider extends ServiceProvider
                 ? $rule->mixedCase()->uncompromised()
                 : $rule;
         });
-
-        $posthogConfig = config('services.posthog');
-
-        PostHog::init(
-            apiKey: $posthogConfig['api_key'],
-            options: [
-                'host' => $posthogConfig['host'],
-            ]
-        );
     }
 }

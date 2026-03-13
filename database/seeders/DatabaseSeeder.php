@@ -4,16 +4,6 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Enums\UserRoleEnum;
-use App\Models\Company;
-use App\Models\CompanyPolicy;
-use App\Models\Department;
-use App\Models\Employee;
-use App\Models\JobRole;
-use App\Models\Project;
-use App\Models\Request;
-use App\Models\Timesheet;
-use App\Models\TimesheetItem;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,62 +17,9 @@ final class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create admin user
-        $user = User::factory()
+        User::factory()
             ->create([
                 'email' => 'admin@test.com',
-                'role' => UserRoleEnum::ADMIN,
             ]);
-
-        // Create a company
-        $company = Company::factory()->create([
-            'owner_id' => $user->id,
-        ]);
-
-        $projects = Project::factory(5)->create([
-            'company_id' => $company->id,
-        ]);
-
-        // Create Company Policy
-        CompanyPolicy::factory()->create([
-            'company_id' => $company->id,
-        ]);
-
-        // Create Departments
-        $departments = Department::factory(5)->create([
-            'company_id' => $company->id,
-        ]);
-
-        // Create Job Roles
-        $jobRoles = JobRole::factory(5)->create([
-            'company_id' => $company->id,
-        ]);
-
-        // Create Employees
-        $users = User::factory(10)->create([
-            'role' => UserRoleEnum::EMPLOYEE,
-        ]);
-
-        foreach ($users as $user) {
-            $employee = Employee::factory()->create([
-                'user_id' => $user->id,
-                'company_id' => $company->id,
-                'department_id' => $departments->random()->id,
-                'job_role_id' => $jobRoles->random()->id,
-            ]);
-
-            Request::factory(5)->create([
-                'employee_id' => $employee->id,
-            ]);
-
-            $timesheets = Timesheet::factory(5)->create([
-                'employee_id' => $employee->id,
-            ]);
-
-            TimesheetItem::factory(5)->create([
-                'timesheet_id' => $timesheets->random()->id,
-                'project_id' => $projects->random()->id,
-            ]);
-        }
     }
 }
