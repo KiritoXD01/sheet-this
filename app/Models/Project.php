@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\ProjectStatusEnum;
+use Database\Factories\ProjectFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +22,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon $updated_at
  * @property-read User $user
  */
+#[UseFactory(ProjectFactory::class)]
 final class Project extends Model
 {
     use HasFactory, HasUlids;

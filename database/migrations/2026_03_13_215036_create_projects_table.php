@@ -18,7 +18,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->foreignUlid('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('name');
-            $table->string('status')->default(ProjectStatusEnum::ACTIVE->value);
+            $table->string('status', 15)->default(ProjectStatusEnum::ACTIVE->value);
             $table->timestamps();
 
             $table->unique(['user_id', 'name']);
