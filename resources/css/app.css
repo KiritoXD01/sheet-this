@@ -1,41 +1,7 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/forms";
 
-@import '../../vendor/wireui/wireui/ts/global.css';
-@source '../../vendor/wireui/wireui';
-
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
-
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-
-    --color-primary: #00bfa5;
-    --color-primary-hover: #009688;
-    --color-background-light: #F8FAFC;
-    --color-text-light: #e2e8f0;
-    --color-card-light: #ffffff;
-
-    --font-family-display: 'Inter', sans-serif;
-    --font-family-sans: 'Inter', sans-serif;
-
-    --radius: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --radius-2xl: 1.5rem;
-
-    --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
-    --shadow-glow: 0 0 20px rgba(0, 191, 165, 0.3);
-
-    /* Dark mode colors */
-    --color-background-dark: oklch(0.15 0.01 240);
-    --color-card-dark: oklch(0.20 0.01 240);
-    --color-text-dark: oklch(0.95 0 0);
-    --color-border-dark: oklch(0.25 0.01 240);
-    --color-slate-800-dark: oklch(0.22 0.01 240);
-    --shadow-soft-dark: 0 10px 40px -10px rgba(0,0,0,0.4);
-    --shadow-glow-dark: 0 0 20px rgba(0, 191, 165, 0.4);
-}
