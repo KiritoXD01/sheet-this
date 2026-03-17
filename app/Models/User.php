@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Database\Factories\UserFactory;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -28,7 +26,7 @@ use Illuminate\Support\Carbon;
  * @property-read Collection<int, Project> $projects
  */
 #[UseFactory(UserFactory::class)]
-final class User extends Authenticatable implements FilamentUser
+final class User extends Authenticatable
 {
     use HasFactory, HasUlids, Notifiable;
 
@@ -54,11 +52,6 @@ final class User extends Authenticatable implements FilamentUser
         'password',
         'remember_token',
     ];
-
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return true;
-    }
 
     public function projects(): HasMany
     {
