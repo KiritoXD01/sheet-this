@@ -1,6 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
-import { Timer, LayoutDashboard, Folder, Clock, ChartColumn, LucideIcon } from 'lucide-react';
+import { Timer, LayoutDashboard, Folder, Clock, LucideIcon } from 'lucide-react';
 import { ReactNode } from 'react';
+import { UserSection } from '@/Components/UserSection';
 
 interface NavItem {
     name: string;
@@ -13,9 +14,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
 
     const navItems: NavItem[] = [
         { name: 'Dashboard', href: '/', icon: LayoutDashboard },
-        { name: 'Projects', href: '/projects', icon: Folder },
-        { name: 'Timesheet', href: '/timesheet', icon: Clock },
-        { name: 'Reports', href: '#', icon: ChartColumn },
+        { name: 'Projects', href: '/dashboard/projects', icon: Folder },
+        { name: 'Timesheet', href: '/dashboard/timesheet', icon: Clock },
     ];
 
     return (
@@ -37,11 +37,10 @@ export default function AppLayout({ children }: { children: ReactNode }) {
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                                    isActive
-                                        ? 'bg-violet-600 text-white'
-                                        : 'text-gray-700 hover:bg-gray-100'
-                                }`}
+                                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive
+                                    ? 'bg-violet-600 text-white'
+                                    : 'text-gray-700 hover:bg-gray-100'
+                                    }`}
                             >
                                 <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-gray-500'}`} />
                                 {item.name}
@@ -51,12 +50,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
                 </nav>
 
                 {/* User Section */}
-                <div className="mt-auto flex items-center gap-3 px-2.5 py-2.5 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
-                    <div className="w-8 h-8 rounded-full bg-violet-600 flex items-center justify-center text-white font-medium text-xs">
-                        B
-                    </div>
-                    <span className="text-gray-900 font-medium text-[13px]">bellota</span>
-                </div>
+                <UserSection />
             </aside>
 
             {/* Main Content */}

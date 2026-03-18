@@ -1,7 +1,11 @@
-import { Link } from '@inertiajs/react';
-import { Timer, Mail, Lock, EyeOff } from 'lucide-react';
+import { store } from '@/actions/App/Http/Controllers/Auth/LoginController';
+import { Form, Link, usePage } from '@inertiajs/react';
+import { Timer, Mail, Lock, EyeOff, AlertCircle } from 'lucide-react';
 
 export default function Login() {
+    const { props } = usePage();
+    const errorMessage = (props.flash as { message?: string })?.message;
+
     return (
         <div className="flex min-h-screen">
             {/* Brand Panel */}
@@ -60,38 +64,53 @@ export default function Login() {
 
             {/* Form Panel */}
             <div className="w-[540px] bg-white p-16 flex items-center justify-center">
-                <div className="w-full max-w-sm flex flex-col gap-8">
+                <Form className="w-full max-w-sm flex flex-col gap-8" action={store()} method="post" autoComplete='off'>
                     {/* Form Header */}
                     <div className="flex flex-col gap-2">
                         <h2 className="text-gray-900 font-inter font-bold text-[28px]">Welcome back</h2>
                         <p className="text-gray-700 font-inter text-sm">Sign in to your account to continue tracking</p>
                     </div>
 
+                    {/* Error Message */}
+                    {errorMessage && (
+                        <div className="flex items-center gap-2.5 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                            <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+                            <p className="text-red-700 font-inter text-sm">{errorMessage}</p>
+                        </div>
+                    )}
+
                     {/* Form Fields */}
                     <div className="flex flex-col gap-5">
                         {/* Email Field */}
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-gray-900 text-[11px] font-inter font-semibold tracking-widest uppercase">Email</label>
+                            <label className="text-gray-900 text-[11px] font-inter font-semibold tracking-widest uppercase" htmlFor="email">Email</label>
                             <div className="flex items-center gap-2.5 bg-[#F8F7FC] border border-gray-200 rounded-lg px-4 py-3">
                                 <Mail className="w-4 h-4 text-gray-400" />
                                 <input
                                     type="email"
+                                    name="email"
                                     placeholder="you@email.com"
                                     className="flex-1 bg-transparent text-gray-900 font-inter text-sm outline-none placeholder:text-gray-400"
+                                    id='email'
+                                    required
+                                    maxLength={191}
                                 />
                             </div>
                         </div>
 
                         {/* Password Field */}
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-gray-900 text-[11px] font-inter font-semibold tracking-widest uppercase">Password</label>
+                            <label className="text-gray-900 text-[11px] font-inter font-semibold tracking-widest uppercase" htmlFor="password">Password</label>
                             <div className="flex items-center justify-between bg-[#F8F7FC] border border-gray-200 rounded-lg px-4 py-3">
                                 <div className="flex items-center gap-2.5">
                                     <Lock className="w-4 h-4 text-gray-400" />
                                     <input
                                         type="password"
+                                        name="password"
                                         placeholder="••••••••••"
                                         className="flex-1 bg-transparent text-gray-900 font-inter text-sm outline-none placeholder:text-gray-400"
+                                        id='password'
+                                        required
                                     />
                                 </div>
                                 <EyeOff className="w-4 h-4 text-gray-400 cursor-pointer" />
@@ -112,7 +131,7 @@ export default function Login() {
 
                     {/* Actions */}
                     <div className="flex flex-col gap-5">
-                        <button className="w-full bg-violet-600 hover:bg-violet-700 transition-colors text-white font-inter font-semibold text-[15px] py-3.5 rounded-lg">
+                        <button type="submit" className="w-full bg-violet-600 hover:bg-violet-700 transition-colors text-white font-inter font-semibold text-[15px] py-3.5 rounded-lg cursor-pointer">
                             Sign In
                         </button>
                     </div>
@@ -124,7 +143,7 @@ export default function Login() {
                             Create one
                         </Link>
                     </div>
-                </div>
+                </Form>
             </div>
         </div>
     );

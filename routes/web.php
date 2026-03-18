@@ -2,14 +2,22 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::redirect('/', '/dashboard')->name('home');
 
-Route::get('/login', function () {
-    return Inertia::render('Auth/Login');
-})->name('login');
+Route::prefix('login')
+    ->name('login.')
+    ->group(function () {
+        Route::middleware('guest')->group(function () {
+            Route::get('/', [LoginController::class, 'index'])->name('index');
+            Route::post('/', [LoginController::class, 'store'])->name('store');
+        });
+
+        Route::middleware('auth')->post('/logout', [LoginController::class, 'destroy'])->name('logout');
+    });
 
 Route::get('/register', function () {
     return Inertia::render('Auth/Register');
