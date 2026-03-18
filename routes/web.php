@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,9 +20,13 @@ Route::prefix('login')
         Route::middleware('auth')->post('/logout', [LoginController::class, 'destroy'])->name('logout');
     });
 
-Route::get('/register', function () {
-    return Inertia::render('Auth/Register');
-})->name('register');
+Route::prefix('register')
+    ->name('register.')
+    ->group(function () {
+        Route::middleware('guest')->group(function () {
+            Route::get('/', [RegisterController::class, 'index'])->name('index');
+        });
+    });
 
 Route::get('/forgot-password', function () {
     return Inertia::render('Auth/ForgotPassword');

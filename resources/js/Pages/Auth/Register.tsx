@@ -82,18 +82,10 @@ export default function Register() {
                     {/* Form Fields */}
                     <div className="flex flex-col gap-4">
                         {/* Name Row */}
-                        <div className="flex gap-3">
-                            <div className="flex-1 flex flex-col gap-1.5">
-                                <label className="text-gray-500 text-[11px] font-inter font-semibold tracking-widest uppercase">First Name</label>
-                                <div className="bg-[#F8F7FC] border border-gray-200 rounded-lg px-4 py-3">
-                                    <span className="text-gray-400 font-inter text-sm">John</span>
-                                </div>
-                            </div>
-                            <div className="flex-1 flex flex-col gap-1.5">
-                                <label className="text-gray-500 text-[11px] font-inter font-semibold tracking-widest uppercase">Last Name</label>
-                                <div className="bg-[#F8F7FC] border border-gray-200 rounded-lg px-4 py-3">
-                                    <span className="text-gray-400 font-inter text-sm">Doe</span>
-                                </div>
+                        <div className="flex-1 flex flex-col gap-1.5">
+                            <label className="text-gray-500 text-[11px] font-inter font-semibold tracking-widest uppercase">Name</label>
+                            <div className="bg-[#F8F7FC] border border-gray-200 rounded-lg px-4 py-3">
+                                <span className="text-gray-400 font-inter text-sm">John</span>
                             </div>
                         </div>
 

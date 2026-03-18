@@ -94,47 +94,7 @@ home.options = (options?: RouteQueryOptions): RouteDefinition<'options'> => ({
 })
 
 /**
-* @see routes/web.php:22
-* @route '/register'
-*/
-export const register = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: register.url(options),
-    method: 'get',
-})
-
-register.definition = {
-    methods: ["get","head"],
-    url: '/register',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see routes/web.php:22
-* @route '/register'
-*/
-register.url = (options?: RouteQueryOptions) => {
-    return register.definition.url + queryParams(options)
-}
-
-/**
-* @see routes/web.php:22
-* @route '/register'
-*/
-register.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: register.url(options),
-    method: 'get',
-})
-
-/**
-* @see routes/web.php:22
-* @route '/register'
-*/
-register.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: register.url(options),
-    method: 'head',
-})
-
-/**
-* @see routes/web.php:26
+* @see routes/web.php:31
 * @route '/forgot-password'
 */
 export const forgotPassword = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -148,7 +108,7 @@ forgotPassword.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:26
+* @see routes/web.php:31
 * @route '/forgot-password'
 */
 forgotPassword.url = (options?: RouteQueryOptions) => {
@@ -156,7 +116,7 @@ forgotPassword.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:26
+* @see routes/web.php:31
 * @route '/forgot-password'
 */
 forgotPassword.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -165,7 +125,7 @@ forgotPassword.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:26
+* @see routes/web.php:31
 * @route '/forgot-password'
 */
 forgotPassword.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
