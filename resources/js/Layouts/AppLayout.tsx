@@ -1,10 +1,17 @@
 import { Link, usePage } from '@inertiajs/react';
-import { Timer, LayoutDashboard, Folder, Clock, ChartColumn, TrendingUp } from 'lucide-react';
+import { Timer, LayoutDashboard, Folder, Clock, ChartColumn, LucideIcon } from 'lucide-react';
+import { ReactNode } from 'react';
 
-export default function AppLayout({ children }) {
+interface NavItem {
+    name: string;
+    href: string;
+    icon: LucideIcon;
+}
+
+export default function AppLayout({ children }: { children: ReactNode }) {
     const { url } = usePage();
 
-    const navItems = [
+    const navItems: NavItem[] = [
         { name: 'Dashboard', href: '/', icon: LayoutDashboard },
         { name: 'Projects', href: '/projects', icon: Folder },
         { name: 'Timesheet', href: '/timesheet', icon: Clock },

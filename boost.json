@@ -1,7 +1,8 @@
 {
     "agents": [
         "claude_code",
-        "opencode"
+        "opencode",
+        "gemini"
     ],
     "guidelines": true,
     "herd_mcp": false,
@@ -10,6 +11,7 @@
     "sail": false,
     "skills": [
         "pest-testing",
+        "inertia-react-development",
         "tailwindcss-development"
     ]
 }

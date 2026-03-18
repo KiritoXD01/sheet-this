@@ -1,15 +1,28 @@
 import AppLayout from '@/Layouts/AppLayout';
-import { Square, Play } from 'lucide-react';
+import { Square } from 'lucide-react';
+
+interface Entry {
+    id: number;
+    name: string;
+    project: string;
+    duration: string;
+}
+
+interface WeeklyStat {
+    day: string;
+    hours: string;
+    percent: number;
+}
 
 export default function Dashboard() {
-    const entries = [
+    const entries: Entry[] = [
         { id: 1, name: 'Landing page redesign', project: 'Acme Corp Website', duration: '01:24:37' },
         { id: 2, name: 'API integration docs', project: 'DevTools Pro', duration: '02:15:00' },
         { id: 3, name: 'User research interviews', project: 'Bloom App', duration: '00:45:12' },
         { id: 4, name: 'Email template design', project: 'Acme Corp Website', duration: '00:32:48' },
     ];
 
-    const weeklyStats = [
+    const weeklyStats: WeeklyStat[] = [
         { day: 'MON', hours: '6:30', percent: 100 },
         { day: 'TUE', hours: '5:15', percent: 82 },
         { day: 'WED', hours: '7:20', percent: 115 },

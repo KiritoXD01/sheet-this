@@ -1,8 +1,19 @@
 import AppLayout from '@/Layouts/AppLayout';
 import { Plus } from 'lucide-react';
 
+interface Project {
+    id: number;
+    name: string;
+    client: string;
+    hours: string;
+    tasks: string;
+    budgetPercent: number;
+    color: string;
+    textColor: string;
+}
+
 export default function Projects() {
-    const projects = [
+    const projects: Project[] = [
         {
             id: 1,
             name: 'Acme Corp Website',
