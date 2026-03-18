@@ -8,6 +8,7 @@ export interface User {
 export interface Project {
     id: string;
     name: string;
+    color: string;
 }
 
 export type PageProps<

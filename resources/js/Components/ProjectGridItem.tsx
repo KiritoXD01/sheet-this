@@ -1,19 +1,33 @@
-import { Project } from "@/types";
+import { Project } from '@/types';
+import { Pencil } from 'lucide-react';
 
 interface Props {
     project: Project;
+    onEdit?: () => void;
 }
 
-export function ProjectGridItem({ project }: Props) {
+export function ProjectGridItem({ project, onEdit }: Props) {
     return (
-        <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-3.5 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+        <div className="group bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-3.5 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
 
             {/* Card Header */}
-            <div className="flex flex-col gap-2.5">
+            <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-2.5">
-                    <div className={`w-2.5 h-2.5 rounded-full`}></div>
+                    <div
+                        className="w-2.5 h-2.5 rounded-full shrink-0"
+                        style={{ backgroundColor: project.color ?? '#7C3AED' }}
+                    />
                     <h3 className="text-gray-900 font-inter font-semibold text-[15px]">{project.name}</h3>
                 </div>
+                {onEdit && (
+                    <button
+                        onClick={(e) => { e.stopPropagation(); onEdit(); }}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded-md hover:bg-gray-100 text-gray-400 hover:text-gray-600"
+                        aria-label="Edit project"
+                    >
+                        <Pencil className="w-3.5 h-3.5" />
+                    </button>
+                )}
             </div>
 
             {/* Stats */}
@@ -30,9 +44,9 @@ export function ProjectGridItem({ project }: Props) {
                 </div>
                 <div className="w-full h-1 bg-gray-500/20 rounded-full overflow-hidden">
                     <div
-                        className={`h-full rounded-full`}
-                        style={{ width: `0%` }}
-                    ></div>
+                        className="h-full rounded-full"
+                        style={{ width: '0%', backgroundColor: project.color ?? '#7C3AED' }}
+                    />
                 </div>
             </div>
 
