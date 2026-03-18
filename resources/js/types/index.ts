@@ -1,8 +1,13 @@
 export interface User {
-    id: number;
+    id: string;
     name: string;
     email: string;
     email_verified_at?: string;
+}
+
+export interface Project {
+    id: string;
+    name: string;
 }
 
 export type PageProps<

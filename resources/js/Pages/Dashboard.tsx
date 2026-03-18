@@ -38,7 +38,7 @@ export default function Dashboard() {
                 {/* Main Content Area */}
                 <div className="flex-1 p-8 overflow-y-auto">
                     <div className="flex flex-col gap-8 max-w-4xl mx-auto">
-                        
+
                         {/* Active Timer */}
                         <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between shadow-sm">
                             <div className="flex flex-col gap-1.5">
@@ -48,7 +48,7 @@ export default function Dashboard() {
                                     <span className="text-gray-500 text-xs font-inter">Acme Corp Website</span>
                                 </div>
                             </div>
-                            
+
                             <div className="flex items-center gap-5">
                                 <span className="text-violet-600 font-jetbrains font-bold text-4xl tracking-tight">01:24:37</span>
                                 <button className="bg-red-500 hover:bg-red-600 transition-colors text-white rounded-md px-5 py-3 flex items-center gap-2 font-jetbrains text-xs font-semibold tracking-widest shadow-sm">
@@ -61,7 +61,7 @@ export default function Dashboard() {
                         {/* Today's Entries */}
                         <div className="flex flex-col gap-3">
                             <h3 className="text-gray-500 text-[11px] font-inter font-semibold tracking-widest uppercase">Today's Entries</h3>
-                            
+
                             <div className="flex flex-col gap-3">
                                 {entries.map((entry) => (
                                     <div key={entry.id} className="bg-white rounded-lg border border-gray-200 p-4 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow cursor-pointer">
@@ -80,7 +80,7 @@ export default function Dashboard() {
 
                 {/* Right Sidebar */}
                 <aside className="w-[300px] border-l border-gray-200 bg-white p-6 flex flex-col gap-6 overflow-y-auto hidden xl:flex">
-                    
+
                     {/* Weekly Summary */}
                     <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-4 shadow-sm">
                         <div className="flex items-center justify-between">
@@ -93,8 +93,8 @@ export default function Dashboard() {
                                 <div key={stat.day} className="flex items-center gap-3 text-[11px] font-jetbrains font-medium">
                                     <span className="text-gray-900 w-8 font-semibold tracking-wide">{stat.day}</span>
                                     <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                                        <div 
-                                            className="h-full bg-violet-600 rounded-full" 
+                                        <div
+                                            className="h-full bg-violet-600 rounded-full"
                                             style={{ width: `${Math.min(stat.percent, 100)}%` }}
                                         ></div>
                                     </div>
