@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { Timer, Mail, Lock, Eye, EyeOff, Globe, Github, Zap, LayoutDashboard, FileText, Shield } from 'lucide-react';
+import { Timer, Mail, Lock, EyeOff, Zap, LayoutDashboard, FileText, Shield } from 'lucide-react';
 
 export default function Register() {
     return (
@@ -142,25 +142,6 @@ export default function Register() {
                         <button className="w-full bg-violet-600 hover:bg-violet-700 transition-colors text-white font-inter font-semibold text-[15px] py-3.5 rounded-lg">
                             Create Account
                         </button>
-
-                        {/* Divider */}
-                        <div className="flex items-center gap-4">
-                            <div className="flex-1 h-px bg-gray-200"></div>
-                            <span className="text-gray-400 text-[11px] font-inter font-semibold tracking-widest uppercase">Or</span>
-                            <div className="flex-1 h-px bg-gray-200"></div>
-                        </div>
-
-                        {/* Social Buttons */}
-                        <div className="flex gap-3">
-                            <button className="flex-1 border border-gray-200 rounded-lg px-4 py-3 flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
-                                <Globe className="w-4 h-4 text-gray-500" />
-                                <span className="text-gray-600 font-inter text-[13px] font-medium">Google</span>
-                            </button>
-                            <button className="flex-1 border border-gray-200 rounded-lg px-4 py-3 flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
-                                <Github className="w-4 h-4 text-gray-500" />
-                                <span className="text-gray-600 font-inter text-[13px] font-medium">GitHub</span>
-                            </button>
-                        </div>
                     </div>
 
                     {/* Login Link */}

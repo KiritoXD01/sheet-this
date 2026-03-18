@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property string $user_id
  * @property string $name
  * @property ProjectStatusEnum $status
+ * @property string|null $color
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property-read User $user
@@ -33,6 +34,7 @@ final class Project extends Model
         'user_id',
         'name',
         'status',
+        'color',
     ];
 
     protected $casts = [

@@ -23,6 +23,7 @@ final class ProjectFactory extends Factory
         return [
             'name' => fake()->company(),
             'status' => ProjectStatusEnum::random(),
+            'color' => fake()->hexColor(),
         ];
     }
 }

@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { Timer, Mail, Lock, Eye, EyeOff, Globe, Github } from 'lucide-react';
+import { Timer, Mail, Lock, EyeOff } from 'lucide-react';
 
 export default function Login() {
     return (
@@ -74,8 +74,8 @@ export default function Login() {
                             <label className="text-gray-900 text-[11px] font-inter font-semibold tracking-widest uppercase">Email</label>
                             <div className="flex items-center gap-2.5 bg-[#F8F7FC] border border-gray-200 rounded-lg px-4 py-3">
                                 <Mail className="w-4 h-4 text-gray-400" />
-                                <input 
-                                    type="email" 
+                                <input
+                                    type="email"
                                     placeholder="you@email.com"
                                     className="flex-1 bg-transparent text-gray-900 font-inter text-sm outline-none placeholder:text-gray-400"
                                 />
@@ -88,8 +88,8 @@ export default function Login() {
                             <div className="flex items-center justify-between bg-[#F8F7FC] border border-gray-200 rounded-lg px-4 py-3">
                                 <div className="flex items-center gap-2.5">
                                     <Lock className="w-4 h-4 text-gray-400" />
-                                    <input 
-                                        type="password" 
+                                    <input
+                                        type="password"
                                         placeholder="••••••••••"
                                         className="flex-1 bg-transparent text-gray-900 font-inter text-sm outline-none placeholder:text-gray-400"
                                     />
@@ -115,25 +115,6 @@ export default function Login() {
                         <button className="w-full bg-violet-600 hover:bg-violet-700 transition-colors text-white font-inter font-semibold text-[15px] py-3.5 rounded-lg">
                             Sign In
                         </button>
-
-                        {/* Divider */}
-                        <div className="flex items-center gap-4">
-                            <div className="flex-1 h-px bg-gray-200"></div>
-                            <span className="text-gray-500 text-[11px] font-inter font-semibold tracking-widest uppercase">Or</span>
-                            <div className="flex-1 h-px bg-gray-200"></div>
-                        </div>
-
-                        {/* Social Buttons */}
-                        <div className="flex gap-3">
-                            <button className="flex-1 border border-gray-200 rounded-lg px-4 py-3 flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
-                                <Globe className="w-4 h-4 text-gray-600" />
-                                <span className="text-gray-700 font-inter text-[13px] font-medium">Google</span>
-                            </button>
-                            <button className="flex-1 border border-gray-200 rounded-lg px-4 py-3 flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
-                                <Github className="w-4 h-4 text-gray-600" />
-                                <span className="text-gray-700 font-inter text-[13px] font-medium">GitHub</span>
-                            </button>
-                        </div>
                     </div>
 
                     {/* Sign Up Link */}
