@@ -6,10 +6,10 @@ import { Plus } from 'lucide-react';
 import { useState } from 'react';
 
 interface Props {
-    projects?: Project[];
+    projects: Project[];
 }
 
-export default function Projects({ projects = [] }: Props) {
+export default function Projects({ projects }: Props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProject, setEditingProject] = useState<Project | undefined>(undefined);
 
@@ -31,14 +31,14 @@ export default function Projects({ projects = [] }: Props) {
     return (
         <AppLayout>
             <div className="flex-1 p-8 overflow-y-auto">
-                <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+                <div className="flex flex-col gap-6 max-w-5xl mx-auto">
 
                     {/* Header */}
                     <div className="flex items-center justify-between">
                         <h1 className="text-gray-900 font-inter font-semibold text-2xl">Projects</h1>
                         <button
                             onClick={openCreateModal}
-                            className="bg-violet-600 hover:bg-violet-700 transition-colors text-white rounded-md px-4 py-2.5 flex items-center gap-2 shadow-sm"
+                            className="bg-accent hover:bg-accent/90 transition-colors text-white rounded-md px-4 py-2.5 flex items-center gap-2 cursor-pointer"
                         >
                             <Plus className="w-4 h-4" />
                             <span className="font-inter font-semibold text-[13px]">New Project</span>
@@ -58,8 +58,8 @@ export default function Projects({ projects = [] }: Props) {
                         </div>
                     ) : (
                         <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
-                            <div className="w-14 h-14 rounded-2xl bg-violet-50 flex items-center justify-center">
-                                <Plus className="w-7 h-7 text-violet-600" />
+                            <div className="w-14 h-14 rounded-2xl bg-accent-light flex items-center justify-center">
+                                <Plus className="w-7 h-7 text-accent" />
                             </div>
                             <div>
                                 <p className="font-inter font-semibold text-gray-900">No projects yet</p>
@@ -67,7 +67,7 @@ export default function Projects({ projects = [] }: Props) {
                             </div>
                             <button
                                 onClick={openCreateModal}
-                                className="bg-violet-600 hover:bg-violet-700 transition-colors text-white rounded-lg px-5 py-2.5 font-inter font-semibold text-sm"
+                                className="bg-accent hover:bg-accent/90 transition-colors text-white rounded-lg px-5 py-2.5 font-inter font-semibold text-sm"
                             >
                                 Create Project
                             </button>

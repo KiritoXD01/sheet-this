@@ -79,7 +79,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::destroy
-* @see app/Http/Controllers/Auth/LoginController.php:36
+* @see app/Http/Controllers/Auth/LoginController.php:39
 * @route '/login/logout'
 */
 export const destroy = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -94,7 +94,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::destroy
-* @see app/Http/Controllers/Auth/LoginController.php:36
+* @see app/Http/Controllers/Auth/LoginController.php:39
 * @route '/login/logout'
 */
 destroy.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ destroy.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::destroy
-* @see app/Http/Controllers/Auth/LoginController.php:36
+* @see app/Http/Controllers/Auth/LoginController.php:39
 * @route '/login/logout'
 */
 destroy.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({

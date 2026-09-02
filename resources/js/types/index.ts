@@ -2,7 +2,6 @@ export interface User {
     id: string;
     name: string;
     email: string;
-    email_verified_at?: string;
 }
 
 export interface Project {
@@ -11,10 +10,16 @@ export interface Project {
     color: string;
 }
 
+export interface Flash {
+    message?: string | null;
+    status?: string | null;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
     auth: {
-        user: User;
+        user: User | null;
     };
+    flash: Flash;
 };

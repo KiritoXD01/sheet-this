@@ -1,7 +1,8 @@
+import { store, update } from '@/actions/App/Http/Controllers/ProjectController';
+import { Project } from '@/types';
 import { useForm } from '@inertiajs/react';
 import { Folder, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Project } from '@/types';
 
 const PROJECT_COLORS = [
     '#7C3AED',
@@ -67,6 +68,19 @@ export function ProjectModal({ project, onClose }: Props) {
         setCustomColorInput('');
     }, [project?.id]);
 
+    // Close on Escape
+    useEffect(() => {
+        function handleKeyDown(event: KeyboardEvent) {
+            if (event.key === 'Escape') {
+                onClose();
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [onClose]);
+
     function handleCustomColorChange(value: string) {
         setCustomColorInput(value);
 
@@ -81,14 +95,15 @@ export function ProjectModal({ project, onClose }: Props) {
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        if (isEditing) {
-            put(`/projects/${project!.id}`, {
-                onSuccess: () => { reset(); onClose(); },
-            });
+        const options = {
+            preserveScroll: true,
+            onSuccess: () => { reset(); onClose(); },
+        };
+
+        if (project) {
+            put(update(project.id).url, options);
         } else {
-            post('/projects', {
-                onSuccess: () => { reset(); onClose(); },
-            });
+            post(store().url, options);
         }
     }
 
@@ -96,6 +111,9 @@ export function ProjectModal({ project, onClose }: Props) {
         /* Backdrop */
         <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-modal-title"
             onClick={onClose}
         >
             {/* Modal card */}
@@ -107,13 +125,14 @@ export function ProjectModal({ project, onClose }: Props) {
 
                     {/* Header */}
                     <div className="flex items-center justify-between">
-                        <h2 className="font-inter text-lg font-bold text-gray-900">
+                        <h2 id="project-modal-title" className="font-inter text-lg font-bold text-gray-900">
                             {isEditing ? 'Edit Project' : 'New Project'}
                         </h2>
                         <button
                             type="button"
                             onClick={onClose}
-                            className="text-gray-400 hover:text-gray-600 transition-colors"
+                            className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+                            aria-label="Close"
                         >
                             <X className="w-5 h-5" />
                         </button>
@@ -124,9 +143,9 @@ export function ProjectModal({ project, onClose }: Props) {
                         <label className="font-inter text-[11px] font-semibold uppercase tracking-[2px] text-gray-400">
                             Project Name
                         </label>
-                        <div className={`flex items-center gap-2 rounded-lg border px-3.5 py-2.5 bg-[#F8F7FC] transition-colors ${errors.name ? 'border-red-400' : 'border-gray-200 focus-within:border-violet-600'
+                        <div className={`flex items-center gap-2 rounded-lg border px-3.5 py-2.5 bg-inset transition-colors ${errors.name ? 'border-red-400' : 'border-gray-200 focus-within:border-accent'
                             }`}>
-                            <Folder className="w-4 h-4 shrink-0 text-violet-600" />
+                            <Folder className="w-4 h-4 shrink-0 text-accent" />
                             <input
                                 type="text"
                                 value={data.name}
@@ -156,7 +175,7 @@ export function ProjectModal({ project, onClose }: Props) {
                                             key={color}
                                             type="button"
                                             onClick={() => setData('color', color)}
-                                            className="w-7 h-7 rounded-full transition-transform hover:scale-110 focus:outline-none"
+                                            className="w-7 h-7 rounded-full transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 cursor-pointer"
                                             style={{
                                                 backgroundColor: color,
                                                 boxShadow: data.color === color
@@ -175,7 +194,7 @@ export function ProjectModal({ project, onClose }: Props) {
                             <label className="font-inter text-xs font-medium text-gray-500">
                                 Custom Color
                             </label>
-                            <div className="flex items-center gap-2 rounded-lg border border-gray-200 px-3.5 py-2.5 bg-[#F8F7FC] transition-colors focus-within:border-violet-600">
+                            <div className="flex items-center gap-2 rounded-lg border border-gray-200 px-3.5 py-2.5 bg-inset transition-colors focus-within:border-accent">
                                 <span className="font-inter text-sm font-semibold text-gray-400">#</span>
                                 <input
                                     type="text"
@@ -189,7 +208,7 @@ export function ProjectModal({ project, onClose }: Props) {
                         </div>
 
                         {/* Selected color display */}
-                        <div className="mt-1 flex items-center gap-2 rounded-lg bg-[#F8F7FC] px-3 py-2">
+                        <div className="mt-1 flex items-center gap-2 rounded-lg bg-inset px-3 py-2">
                             <div
                                 className="w-4 h-4 rounded-full shrink-0"
                                 style={{ backgroundColor: data.color }}
@@ -208,14 +227,14 @@ export function ProjectModal({ project, onClose }: Props) {
                         <button
                             type="button"
                             onClick={onClose}
-                            className="flex-1 rounded-lg border border-gray-200 py-2.5 font-inter text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
+                            className="flex-1 rounded-lg border border-gray-200 py-2.5 font-inter text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors cursor-pointer"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={processing}
-                            className="flex-1 rounded-lg bg-violet-600 py-2.5 font-inter text-sm font-semibold text-white hover:bg-violet-700 transition-colors disabled:opacity-60"
+                            className="flex-1 rounded-lg bg-accent py-2.5 font-inter text-sm font-semibold text-white hover:bg-accent/90 cursor-pointer transition-colors disabled:opacity-60"
                         >
                             {processing
                                 ? 'Saving…'

@@ -22,7 +22,10 @@ final class LoginController extends Controller
     {
         $data = $request->validated();
 
-        $isValidAuth = Auth::attempt($data);
+        $isValidAuth = Auth::attempt(
+            credentials: ['email' => $data['email'], 'password' => $data['password']],
+            remember: (bool) ($data['remember'] ?? false),
+        );
 
         if (! $isValidAuth) {
             return back()->with('message', 'The provided credentials do not match our records.');

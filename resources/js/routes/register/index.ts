@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::index
-* @see app/Http/Controllers/Auth/RegisterController.php:13
+* @see app/Http/Controllers/Auth/RegisterController.php:17
 * @route '/register'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::index
-* @see app/Http/Controllers/Auth/RegisterController.php:13
+* @see app/Http/Controllers/Auth/RegisterController.php:17
 * @route '/register'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::index
-* @see app/Http/Controllers/Auth/RegisterController.php:13
+* @see app/Http/Controllers/Auth/RegisterController.php:17
 * @route '/register'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\RegisterController::index
-* @see app/Http/Controllers/Auth/RegisterController.php:13
+* @see app/Http/Controllers/Auth/RegisterController.php:17
 * @route '/register'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -43,8 +43,43 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+/**
+* @see \App\Http\Controllers\Auth\RegisterController::store
+* @see app/Http/Controllers/Auth/RegisterController.php:22
+* @route '/register'
+*/
+export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(options),
+    method: 'post',
+})
+
+store.definition = {
+    methods: ["post"],
+    url: '/register',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\Auth\RegisterController::store
+* @see app/Http/Controllers/Auth/RegisterController.php:22
+* @route '/register'
+*/
+store.url = (options?: RouteQueryOptions) => {
+    return store.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Auth\RegisterController::store
+* @see app/Http/Controllers/Auth/RegisterController.php:22
+* @route '/register'
+*/
+store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(options),
+    method: 'post',
+})
+
 const register = {
     index: Object.assign(index, index),
+    store: Object.assign(store, store),
 }
 
 export default register

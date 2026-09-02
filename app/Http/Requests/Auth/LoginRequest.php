@@ -28,6 +28,7 @@ final class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'email', 'max:191'],
             'password' => ['required', 'string', Password::default()],
+            'remember' => ['nullable', 'boolean'],
         ];
     }
 }

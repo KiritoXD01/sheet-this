@@ -1,3 +1,4 @@
+import { logout } from '@/routes/login';
 import { Link, usePage } from '@inertiajs/react';
 import { LogOut, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
@@ -17,7 +18,7 @@ export function UserSection() {
                 className="mt-auto flex items-center gap-3 px-2.5 py-2.5 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
                 onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
             >
-                <div className="w-8 h-8 rounded-full bg-violet-600 flex items-center justify-center text-white font-medium text-xs">
+                <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium text-xs">
                     {auth.user.name.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-1">
@@ -31,7 +32,7 @@ export function UserSection() {
             {isUserDropdownOpen && (
                 <div className="absolute bottom-full left-0 right-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-50">
                     <Link
-                        href="/login/logout"
+                        href={logout()}
                         method="post"
                         as="button"
                         className="flex items-center gap-3 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors w-full text-left"

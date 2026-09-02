@@ -1,6 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
 /**
-* @see routes/web.php:39
+* @see routes/web.php:48
 * @route '/dashboard'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -14,7 +14,7 @@ index.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:39
+* @see routes/web.php:48
 * @route '/dashboard'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -22,7 +22,7 @@ index.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:39
+* @see routes/web.php:48
 * @route '/dashboard'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -31,7 +31,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:39
+* @see routes/web.php:48
 * @route '/dashboard'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -40,7 +40,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:43
+* @see routes/web.php:52
 * @route '/dashboard/projects'
 */
 export const projects = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -54,7 +54,7 @@ projects.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:43
+* @see routes/web.php:52
 * @route '/dashboard/projects'
 */
 projects.url = (options?: RouteQueryOptions) => {
@@ -62,7 +62,7 @@ projects.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:43
+* @see routes/web.php:52
 * @route '/dashboard/projects'
 */
 projects.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -71,7 +71,7 @@ projects.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:43
+* @see routes/web.php:52
 * @route '/dashboard/projects'
 */
 projects.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -80,7 +80,7 @@ projects.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:47
+* @see routes/web.php:61
 * @route '/dashboard/timesheet'
 */
 export const timesheet = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ timesheet.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:47
+* @see routes/web.php:61
 * @route '/dashboard/timesheet'
 */
 timesheet.url = (options?: RouteQueryOptions) => {
@@ -102,7 +102,7 @@ timesheet.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:47
+* @see routes/web.php:61
 * @route '/dashboard/timesheet'
 */
 timesheet.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -111,7 +111,7 @@ timesheet.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:47
+* @see routes/web.php:61
 * @route '/dashboard/timesheet'
 */
 timesheet.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -119,51 +119,10 @@ timesheet.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
-/**
-* @see routes/web.php:51
-* @route '/dashboard/privacy-policy'
-*/
-export const privacyPolicy = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: privacyPolicy.url(options),
-    method: 'get',
-})
-
-privacyPolicy.definition = {
-    methods: ["get","head"],
-    url: '/dashboard/privacy-policy',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see routes/web.php:51
-* @route '/dashboard/privacy-policy'
-*/
-privacyPolicy.url = (options?: RouteQueryOptions) => {
-    return privacyPolicy.definition.url + queryParams(options)
-}
-
-/**
-* @see routes/web.php:51
-* @route '/dashboard/privacy-policy'
-*/
-privacyPolicy.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: privacyPolicy.url(options),
-    method: 'get',
-})
-
-/**
-* @see routes/web.php:51
-* @route '/dashboard/privacy-policy'
-*/
-privacyPolicy.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: privacyPolicy.url(options),
-    method: 'head',
-})
-
 const dashboard = {
     index: Object.assign(index, index),
     projects: Object.assign(projects, projects),
     timesheet: Object.assign(timesheet, timesheet),
-    privacyPolicy: Object.assign(privacyPolicy, privacyPolicy),
 }
 
 export default dashboard

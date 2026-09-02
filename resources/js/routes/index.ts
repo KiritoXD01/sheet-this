@@ -94,42 +94,42 @@ home.options = (options?: RouteQueryOptions): RouteDefinition<'options'> => ({
 })
 
 /**
-* @see routes/web.php:31
-* @route '/forgot-password'
+* @see routes/web.php:74
+* @route '/privacy-policy'
 */
-export const forgotPassword = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: forgotPassword.url(options),
+export const privacyPolicy = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: privacyPolicy.url(options),
     method: 'get',
 })
 
-forgotPassword.definition = {
+privacyPolicy.definition = {
     methods: ["get","head"],
-    url: '/forgot-password',
+    url: '/privacy-policy',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:31
-* @route '/forgot-password'
+* @see routes/web.php:74
+* @route '/privacy-policy'
 */
-forgotPassword.url = (options?: RouteQueryOptions) => {
-    return forgotPassword.definition.url + queryParams(options)
+privacyPolicy.url = (options?: RouteQueryOptions) => {
+    return privacyPolicy.definition.url + queryParams(options)
 }
 
 /**
-* @see routes/web.php:31
-* @route '/forgot-password'
+* @see routes/web.php:74
+* @route '/privacy-policy'
 */
-forgotPassword.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: forgotPassword.url(options),
+privacyPolicy.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: privacyPolicy.url(options),
     method: 'get',
 })
 
 /**
-* @see routes/web.php:31
-* @route '/forgot-password'
+* @see routes/web.php:74
+* @route '/privacy-policy'
 */
-forgotPassword.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: forgotPassword.url(options),
+privacyPolicy.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: privacyPolicy.url(options),
     method: 'head',
 })
 

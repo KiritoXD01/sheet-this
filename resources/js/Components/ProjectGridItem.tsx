@@ -8,7 +8,7 @@ interface Props {
 
 export function ProjectGridItem({ project, onEdit }: Props) {
     return (
-        <div className="group bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-3.5 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+        <div className="group bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-3.5 hover:border-gray-300 transition-colors">
 
             {/* Card Header */}
             <div className="flex items-start justify-between gap-2">
@@ -22,7 +22,7 @@ export function ProjectGridItem({ project, onEdit }: Props) {
                 {onEdit && (
                     <button
                         onClick={(e) => { e.stopPropagation(); onEdit(); }}
-                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded-md hover:bg-gray-100 text-gray-400 hover:text-gray-600"
+                        className="opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity p-1 rounded-md hover:bg-gray-100 text-gray-400 hover:text-gray-600 cursor-pointer"
                         aria-label="Edit project"
                     >
                         <Pencil className="w-3.5 h-3.5" />
@@ -32,7 +32,7 @@ export function ProjectGridItem({ project, onEdit }: Props) {
 
             {/* Stats */}
             <div className="flex items-center gap-4 ml-5">
-                <span className="text-gray-900 font-jetbrains font-bold text-xl">0h</span>
+                <span className="text-gray-900 font-jetbrains font-bold text-xl">0:00</span>
                 <span className="text-gray-900 font-jetbrains font-medium text-xs">0 tasks</span>
             </div>
 
@@ -42,7 +42,7 @@ export function ProjectGridItem({ project, onEdit }: Props) {
                     <span className="text-gray-900 text-[10px] font-inter font-semibold tracking-widest uppercase">BUDGET</span>
                     <span className="text-gray-900 font-jetbrains font-semibold text-[11px]">0%</span>
                 </div>
-                <div className="w-full h-1 bg-gray-500/20 rounded-full overflow-hidden">
+                <div className="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
                     <div
                         className="h-full rounded-full"
                         style={{ width: '0%', backgroundColor: project.color ?? '#7C3AED' }}

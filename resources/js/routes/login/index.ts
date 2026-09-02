@@ -79,7 +79,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::logout
-* @see app/Http/Controllers/Auth/LoginController.php:36
+* @see app/Http/Controllers/Auth/LoginController.php:39
 * @route '/login/logout'
 */
 export const logout = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -94,7 +94,7 @@ logout.definition = {
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::logout
-* @see app/Http/Controllers/Auth/LoginController.php:36
+* @see app/Http/Controllers/Auth/LoginController.php:39
 * @route '/login/logout'
 */
 logout.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ logout.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Auth\LoginController::logout
-* @see app/Http/Controllers/Auth/LoginController.php:36
+* @see app/Http/Controllers/Auth/LoginController.php:39
 * @route '/login/logout'
 */
 logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
