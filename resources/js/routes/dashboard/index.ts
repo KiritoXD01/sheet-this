@@ -119,10 +119,51 @@ timesheet.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+/**
+* @see routes/web.php:51
+* @route '/dashboard/privacy-policy'
+*/
+export const privacyPolicy = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: privacyPolicy.url(options),
+    method: 'get',
+})
+
+privacyPolicy.definition = {
+    methods: ["get","head"],
+    url: '/dashboard/privacy-policy',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see routes/web.php:51
+* @route '/dashboard/privacy-policy'
+*/
+privacyPolicy.url = (options?: RouteQueryOptions) => {
+    return privacyPolicy.definition.url + queryParams(options)
+}
+
+/**
+* @see routes/web.php:51
+* @route '/dashboard/privacy-policy'
+*/
+privacyPolicy.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: privacyPolicy.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:51
+* @route '/dashboard/privacy-policy'
+*/
+privacyPolicy.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: privacyPolicy.url(options),
+    method: 'head',
+})
+
 const dashboard = {
     index: Object.assign(index, index),
     projects: Object.assign(projects, projects),
     timesheet: Object.assign(timesheet, timesheet),
+    privacyPolicy: Object.assign(privacyPolicy, privacyPolicy),
 }
 
 export default dashboard

@@ -48,3 +48,7 @@ Route::prefix('/dashboard')
             return Inertia::render('Timesheet');
         })->name('timesheet');
     });
+
+Route::get('/privacy-policy', function () {
+    return Inertia::render('PrivacyPolicy');
+})->name('privacy-policy');
