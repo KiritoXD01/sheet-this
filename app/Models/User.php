@@ -24,6 +24,9 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property-read Collection<int, Project> $projects
+ * @property-read Collection<int, Client> $clients
+ * @property-read Collection<int, Task> $tasks
+ * @property-read Collection<int, TimeEntry> $timeEntries
  */
 #[UseFactory(UserFactory::class)]
 final class User extends Authenticatable
@@ -57,6 +60,33 @@ final class User extends Authenticatable
     {
         return $this->hasMany(
             related: Project::class,
+            foreignKey: 'user_id',
+            localKey: 'id',
+        );
+    }
+
+    public function clients(): HasMany
+    {
+        return $this->hasMany(
+            related: Client::class,
+            foreignKey: 'user_id',
+            localKey: 'id',
+        );
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(
+            related: Task::class,
+            foreignKey: 'user_id',
+            localKey: 'id',
+        );
+    }
+
+    public function timeEntries(): HasMany
+    {
+        return $this->hasMany(
+            related: TimeEntry::class,
             foreignKey: 'user_id',
             localKey: 'id',
         );

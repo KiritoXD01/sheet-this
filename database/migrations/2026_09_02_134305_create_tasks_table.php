@@ -14,14 +14,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->foreignUlid('project_id')->references('id')->on('projects')->cascadeOnDelete();
             $table->foreignUlid('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('name');
             $table->string('status', 15)->default(ProjectStatusEnum::ACTIVE->value);
             $table->timestamps();
 
-            $table->unique(['user_id', 'name']);
+            $table->unique(['project_id', 'name']);
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('tasks');
     }
 };

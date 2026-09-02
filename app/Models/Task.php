@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\ProjectStatusEnum;
-use Database\Factories\ProjectFactory;
+use Database\Factories\TaskFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -17,39 +17,42 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
+ * @property string $project_id
  * @property string $user_id
- * @property string|null $client_id
  * @property string $name
  * @property ProjectStatusEnum $status
- * @property string|null $color
- * @property int|null $budget_seconds
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property-read Project $project
  * @property-read User $user
- * @property-read Client|null $client
- * @property-read Collection<int, Task> $tasks
  * @property-read Collection<int, TimeEntry> $timeEntries
  */
-#[UseFactory(ProjectFactory::class)]
-final class Project extends Model
+#[UseFactory(TaskFactory::class)]
+final class Task extends Model
 {
     use HasFactory, HasUlids;
 
     protected $keyType = 'string';
 
     protected $fillable = [
+        'project_id',
         'user_id',
-        'client_id',
         'name',
         'status',
-        'color',
-        'budget_seconds',
     ];
 
     protected $casts = [
         'status' => ProjectStatusEnum::class,
-        'budget_seconds' => 'integer',
     ];
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: Project::class,
+            foreignKey: 'project_id',
+            ownerKey: 'id',
+        );
+    }
 
     public function user(): BelongsTo
     {
@@ -60,29 +63,11 @@ final class Project extends Model
         );
     }
 
-    public function client(): BelongsTo
-    {
-        return $this->belongsTo(
-            related: Client::class,
-            foreignKey: 'client_id',
-            ownerKey: 'id',
-        );
-    }
-
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(
-            related: Task::class,
-            foreignKey: 'project_id',
-            localKey: 'id',
-        );
-    }
-
     public function timeEntries(): HasMany
     {
         return $this->hasMany(
             related: TimeEntry::class,
-            foreignKey: 'project_id',
+            foreignKey: 'task_id',
             localKey: 'id',
         );
     }

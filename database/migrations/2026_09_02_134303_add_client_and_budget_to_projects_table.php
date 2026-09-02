@@ -14,7 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->string('color', 7)->nullable()->after('name');
+            $table->foreignUlid('client_id')->nullable()->after('user_id')->references('id')->on('clients')->nullOnDelete();
+            $table->integer('budget_seconds')->nullable()->after('color');
         });
     }
 
@@ -24,7 +25,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn('color');
+            $table->dropForeign(['client_id']);
+            $table->dropColumn(['client_id', 'budget_seconds']);
         });
     }
 };

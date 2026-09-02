@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->string('color', 7)->nullable()->after('name');
+        Schema::create('clients', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table->foreignUlid('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->string('name');
+            $table->timestamps();
+
+            $table->unique(['user_id', 'name']);
         });
     }
 
@@ -23,8 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn('color');
-        });
+        Schema::dropIfExists('clients');
     }
 };
